@@ -1,0 +1,17 @@
+.header {
+  background-color: black;
+  height: 30px;
+  color: #fff;
+  display: flex;
+  .welcome-message {
+    width: 100%;
+    font-size: 25px;
+  }
+  .sign-out-wrapper {
+    width: 80px;
+    button{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

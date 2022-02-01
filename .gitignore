@@ -1,1 +1,10 @@
-.idea/
+.yarn/cache
+node_modules
+.idea
+client/build
+/yarn-error.log
+yarn.lock
+
+
+
+/package-lock.json

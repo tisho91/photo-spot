@@ -2,10 +2,27 @@
   "name": "photo-spot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "client/",
+    "server/"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app": "yarn workspace @photo-spot/client start",
+    "server": "yarn workspace @photo-spot/server serve",
+    "server:prod": "yarn workspace @photo-spot/server start",
+    "build-app": "yarn workspace @photo-spot/client build",
+    "start": "yarn workspace @photo-spot/server start",
+    "start:dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn app \"",
+    "heroku-postbuild": "yarn build-app"
+  },
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  },
+  "engines": {
+    "node": "16.13.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "packageManager": "yarn@3.1.1"
 }
