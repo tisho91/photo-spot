@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node app.ts",
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "postinstall": "yarn build",
     "serve": "nodemon app.ts"
   },
   "dependencies": {
@@ -20,6 +22,8 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -30,8 +34,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.7",
     "@types/multer-s3": "^2.7.11",
-    "nodemon": "^2.0.14",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
+    "@types/node": "16.11.7",
+    "nodemon": "^2.0.14"
   }
 }
