@@ -5,7 +5,6 @@
   "scripts": {
     "start": "node dist/app.js",
     "build": "tsc",
-    "postinstall": "yarn build",
     "serve": "nodemon app.ts"
   },
   "dependencies": {
