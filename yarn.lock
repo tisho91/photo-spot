@@ -2045,11 +2045,13 @@ __metadata:
     "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
     "@testing-library/user-event": ^12.1.10
+    "@types/history": ^5.0.0
     "@types/jest": ^26.0.15
     "@types/node": ^12.0.0
     "@types/node-sass": ^4.11.2
     "@types/react": ^17.0.25
     "@types/react-dom": ^17.0.9
+    "@types/react-router": ^5.1.18
     "@types/react-router-dom": ^5.3.0
     history: ^5.0.1
     node-sass: ^6.0.1
@@ -2072,14 +2074,12 @@ __metadata:
   dependencies:
     "@types/bcryptjs": ^2.4.2
     "@types/express": ^4.17.13
-    "@types/history": ^5.0.0
     "@types/http-errors": ^1.8.2
     "@types/jsonwebtoken": ^8.5.8
     "@types/mongoose": ^5.11.97
     "@types/multer": ^1.4.7
     "@types/multer-s3": ^2.7.11
     "@types/node": 16.11.7
-    "@types/react-router": ^5.1.18
     aws-sdk: ^2.1066.0
     axios: ^0.25.0
     bcryptjs: ^2.4.3
