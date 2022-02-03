@@ -1,0 +1,13 @@
+{
+  "env": {
+    "DB_USER": "admin",
+    "DB_PASSWORD": "123password",
+    "DB_NAME": "photo-spot-dev",
+    "GOOGLE_API_KEY": "AIzaSyDlmZ0PvW0yBwB1b-cTX-fTjVfUQUUqWXY",
+    "JWT_PRIVATE_KEY": "secr_etpri_vatekeyt_osec_urem_orel_ater",
+    "AWS_ACCESS_KEY_ID": "AKIA32UIRHTN3ORLXWPL",
+    "AWS_SECRET_ACCESS_KEY": "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",
+    "S3_BUCKET": "photo-spot-storage-dev",
+    "S3_REGION": "eu-central-1"
+  }
+}
