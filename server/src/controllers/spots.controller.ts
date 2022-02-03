@@ -1,18 +1,20 @@
-const HttpError = require('../models/http-error');
-const { validationResult } = require('express-validator');
-const mongoose = require('mongoose');
+import { HttpError } from '../utils/http-error';
+import { validationResult } from 'express-validator';
+import { getCoordinatesForAddress } from '../utils/location'
 
-const getCoordinatesForAddress = require('../utils/location')
-const Spot = require('../models/spot.schema');
-const User = require('../models/user.schema');
+import mongoose from 'mongoose'
 
 
-const getAllSpots = async (req, res, next) => {
+import User from '../models/user.schema'
+import Spot from '../models/spot.schema'
+
+
+export async function getAllSpots(req: any, res: any, next: any) {
     const spots = await Spot.find().exec();
-    res.json({ spots: spots.map(spot => spot.toObject({ getters: true })) })
+    res.json({ spots: spots.map((spot: any) => spot.toObject({ getters: true })) })
 }
 
-const getSpotById = async (req, res, next) => {
+export async function getSpotById(req: any, res: any, next: any) {
     const spotId = req.params.spotId;
     let spot;
     try {
@@ -27,9 +29,9 @@ const getSpotById = async (req, res, next) => {
     res.json({ spot: spot.toObject({ getters: true }) })
 }
 
-const getSpotsByUserId = async (req, res, next) => {
+export async function getSpotsByUserId(req: any, res: any, next: any) {
     const userId = req.params.uid;
-    let user;
+    let user: any;
     try {
         user = await User.findById(userId).populate('spots')
     } catch (error) {
@@ -39,13 +41,13 @@ const getSpotsByUserId = async (req, res, next) => {
         const error = new HttpError('Spotsss not fount', 404)
         return next(error)
     }
-    res.json({ spots: user.spots.map(spot => spot.toObject({ getters: true })) })
+    res.json({ spots: user.spots.map((spot: any) => spot.toObject({ getters: true })) })
 }
 
-const createNewSpot = async (req, res, next) => {
+export async function createNewSpot(req: any, res: any, next: any) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new HttpError('Invalid input'))
+        return next(new HttpError('Invalid input', 402))
     }
     const { title, description, address, image } = req.body;
     let coordinates;
@@ -62,16 +64,16 @@ const createNewSpot = async (req, res, next) => {
         address,
         image,
         creator: req.userData.userId,
-        location: coordinates
+        coordinates
     });
     let user;
     try {
         user = await User.findById(req.userData.userId);
     } catch (error) {
-        return next(new HttpError('User not found'));
+        return next(new HttpError('User not found', 401));
     }
     if (!user) {
-        return next(new HttpError('User not found for this id'));
+        return next(new HttpError('User not found for this id', 401));
     }
     try {
         const session = await mongoose.startSession();
@@ -87,20 +89,21 @@ const createNewSpot = async (req, res, next) => {
     res.status(201).json({ spot: createdSpot.toObject({ getters: true }) })
 }
 
-const updateSpot = async (req, res, next) => {
+export async function updateSpot(req: any, res: any, next: any) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new HttpError('Invalid input'))
+        return next(new HttpError('Invalid input', 402))
     }
     const { title, description } = req.body;
     const spotId = req.params.spotId;
 
-    let spot;
+    let spot: any;
     try {
         spot = await Spot.findById(spotId)
     } catch (error) {
         return next(error)
     }
+
 
     if (spot.creator.toString() !== req.userData.userId) {
         return next(new HttpError('Cannot edit bro', 401))
@@ -120,7 +123,7 @@ const updateSpot = async (req, res, next) => {
 
 }
 
-const deleteSpot = async (req, res, next) => {
+export async function deleteSpot(req: any, res: any, next: any) {
     const spotId = req.params.spotId;
 
     let spot;
@@ -130,7 +133,7 @@ const deleteSpot = async (req, res, next) => {
         return next(error)
     }
     if (!spot) {
-        return next(new HttpError('No spot found'))
+        return next(new HttpError('No spot found', 402))
     }
     if (spot.creator.toString() !== req.userData.userId) {
         return next(new HttpError('Cannot delete bro', 401))
@@ -151,11 +154,3 @@ const deleteSpot = async (req, res, next) => {
 }
 
 
-module.exports = {
-    getAllSpots,
-    getSpotById,
-    getSpotsByUserId,
-    createNewSpot,
-    updateSpot,
-    deleteSpot
-}

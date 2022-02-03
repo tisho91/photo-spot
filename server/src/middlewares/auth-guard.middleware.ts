@@ -1,8 +1,8 @@
-const HttpError = require('../models/http-error')
-const jwt = require('jsonwebtoken');
+const HttpError = require('../utils/http-error')
+import { verify } from 'jsonwebtoken';
 
 
-module.exports = (req, res, next) => {
+export function authGuard(req: any, res: any, next: any) {
     if (req.method === 'OPTIONS') {
         return next();
     }
@@ -12,7 +12,8 @@ module.exports = (req, res, next) => {
         if (!token) {
             return next(new HttpError('Auth failed', 401))
         }
-        const decodedToken = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
+        const privateKey = process.env.JWT_PRIVATE_KEY as string;
+        const decodedToken: any = verify(token, privateKey)
         req.userData = { userId: decodedToken.userId }
         next();
     } catch (error) {
