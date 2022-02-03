@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose'
 import router from './src/routes'
 import { json } from 'body-parser'
-
+import { resolve } from 'path'
 import { dbConfig } from './src/config/db.config'
 import { corsMiddleware } from './src/middlewares/cors.middleware'
 import { HttpError } from './src/utils/http-error';
@@ -14,7 +14,10 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(corsMiddleware);
 }
 
-app.use(router)
+app.use(router);
+app.use((req, res, next) => {
+    res.sendFile(resolve(__dirname, '../client/build', 'index.html'))
+})
 app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
     if (res.headersSent) {
         return next(error)
