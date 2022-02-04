@@ -13,7 +13,7 @@ import {
 
 export async function getAllSpotsHandler(req: Request, res: Response, next: NextFunction) {
     const spots = await getAllSpots();
-    res.json(spots)
+    res.json({ spots })
 }
 
 export async function getSpotByIdHandler(req: Request, res: Response, next: NextFunction) {
@@ -41,12 +41,12 @@ export async function createNewSpotHandler(req: Request, res: Response, next: Ne
     }
     const input = { ...req.body, creator: req.body.userId };
     try {
-
+        const spot = await createNewSpot(input)
+        res.status(201).json({ spot })
     } catch (error) {
-
+        return next(error)
     }
-    const spot = createNewSpot(input)
-    res.status(201).json({ spot })
+
 }
 
 export async function updateSpotHandler(req: Request, res: Response, next: NextFunction) {
