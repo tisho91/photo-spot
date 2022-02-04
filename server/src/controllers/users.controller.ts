@@ -20,7 +20,6 @@ export async function signup(req: any, res: any, next: any) {
     if (!errors.isEmpty()) {
         return next(new HttpError('Invalid email input', 402))
     }
-
     try {
         const user = await createUser(req.body);
         let token = createToken(user.userId);
