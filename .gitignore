@@ -1,3 +1,4 @@
+/server/dist
 .yarn/cache
 node_modules
 .idea
