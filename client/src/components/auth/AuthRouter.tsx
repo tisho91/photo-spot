@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import Login from "../login/Login";
-import Register from "../register/Register";
+import Login from "./login/Login";
+import Register from "./register/Register";
 import { LOGIN, REGISTER } from '../../constants/routes';
 
 

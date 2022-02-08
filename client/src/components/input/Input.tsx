@@ -12,11 +12,7 @@ export type InputProps = {
 const Input: React.FC<any> = (props: InputProps) => {
 
     const { register, errors, ...otherProps } = props;
-
     const className = `form-input ${errors ? 'invalid' : ''}`;
-
-
-
 
     return (
         <div className={className}>
