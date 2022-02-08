@@ -1,7 +1,7 @@
 import React from 'react';
-import Form from '../form/Form';
+import Form from '../../form/Form';
 import * as yup from 'yup';
-import { sendRegisterRequest } from '../../state/authSlice';
+import { sendRegisterRequest } from '../../../state/authSlice';
 import { useDispatch } from 'react-redux';
 
 const Register = () => {
@@ -9,10 +9,6 @@ const Register = () => {
 
     const formDefinition = {
         title: 'Register',
-        initialValues: {
-            email: '',
-            password: ''
-        },
         fields: [
             {
                 id: 'name',

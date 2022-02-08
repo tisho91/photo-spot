@@ -23,8 +23,9 @@ export const fileUpload = multer({
             cb(null, { fieldName: file.fieldname });
         },
         key: function (req: any, file: any, cb: any) {
+            const { userId } = req.params;
             const ext = MIME_TYPE_MAP[file.mimetype];
-            cb(null, `images/avatar.${ ext }`)
+            cb(null, `images/${ userId }/avatar.${ ext }`)
         }
     })
 });

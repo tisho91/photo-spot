@@ -1,18 +1,15 @@
 import { validationResult } from 'express-validator'
-import User from '../models/user.schema'
 import { HttpError } from '../utils/http-error'
-import { createUser, signIn } from '../services/users.service';
+import { createUser, getUserByToken, signIn, updateProfile } from '../services/users.service';
 import { createToken } from '../utils/create-token';
 
-// TODO - remove this functionallity
-export async function getUsers(req: any, res: any, next: any) {
-    let users
+export async function getCurrentUser(req: any, res: any, next: any) {
     try {
-        users = await User.find({}, '-password');
+        const user = await getUserByToken(req.params.userId);
+        res.json({ user })
     } catch (error) {
         return next(error)
     }
-    res.json({ users: users.map(user => user.toObject({ getters: true })) })
 }
 
 export async function signup(req: any, res: any, next: any) {
@@ -22,8 +19,8 @@ export async function signup(req: any, res: any, next: any) {
     }
     try {
         const user = await createUser(req.body);
-        let token = createToken(user.userId);
-        res.status(201).json({ ...user, token })
+        let token = createToken(user.id);
+        res.status(201).json({ token })
     } catch (error) {
         return next(error)
     }
@@ -33,8 +30,8 @@ export async function login(req: any, res: any, next: any) {
     const { email, password } = req.body;
     try {
         const user = await signIn(email, password)
-        const token = createToken(user.userId);
-        res.status(201).json({ ...user, token })
+        const token = createToken(user.id);
+        res.status(201).json({ token })
     } catch (error) {
         return next(error)
     }
@@ -43,7 +40,15 @@ export async function login(req: any, res: any, next: any) {
 
 
 // TODO - change this to edit user and add avatar
-export async function uploadAvatar(req: any, res: any, next: any) {
-    res.status(201).json({ avatar: req.file.location })
+export async function updateUserProfile(req: any, res: any, next: any) {
+    try {
+        const userId = req.params.userId;
+        const name = req.body.name;
+        const avatar = req.file.location;
+        const user = await updateProfile(userId, name, avatar)
+        res.status(201).json({ user })
+    } catch (error) {
+        return next(error)
+    }
 }
 

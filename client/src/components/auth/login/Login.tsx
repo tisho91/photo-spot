@@ -1,7 +1,7 @@
-import Form, { FormDefinition } from '../form/Form';
+import Form, { FormDefinition } from '../../form/Form';
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { sendLoginRequest } from '../../state/authSlice';
+import { sendLoginRequest } from '../../../state/authSlice';
 
 
 const Login = () => {
@@ -9,10 +9,6 @@ const Login = () => {
 
     const formDefinition:FormDefinition = {
         title: 'Login',
-        initialValues: {
-            email: '',
-            password: ''
-        },
         fields: [
             {
                 id: 'email',

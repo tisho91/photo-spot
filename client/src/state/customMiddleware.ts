@@ -12,6 +12,6 @@ export const customMiddleware = (store: any) => (next: any) => async (action: an
     return next(action)
 }
 
-export const LOGOUT_OUT_ACTION = 'auth/logout/fulfilled'
+export const LOGOUT_OUT_ACTION = 'auth/logout'
 export const LOGIN_FULFILLED_ACTION = 'auth/login/fulfilled'
 export const REGISTER_FULFILLED_ACTION = 'auth/register/fulfilled'

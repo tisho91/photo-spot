@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 export const PrivateRoute: React.FC<any> = ({ component: Component, ...rest }) => {
-    const uid = localStorage.getItem('uid');
+    const uid = localStorage.getItem('token');
     return (
      <Route
         {...rest}

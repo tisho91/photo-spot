@@ -1,21 +1,19 @@
 import React from 'react';
 import './Header.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, sendLogoutRequest } from '../../state/authSlice';
+import { authSelector, logout, userSelector } from '../../state/authSlice';
 import FormButton from '../formButton/FormButton';
-import { userSelector } from '../../state/userSlice';
 
 
 
 const Header= () => {
-    const { uid } = useSelector(authSelector);
-    const { displayName } = useSelector(userSelector);
+    const { id, name } = useSelector(userSelector);
     const dispatch = useDispatch();
     const signOutButtonProps = {
         text: 'Sign Out',
         className: 'sign-out',
         onClick: ()=>{
-            dispatch(sendLogoutRequest())
+            dispatch(logout())
         }
     }
 
@@ -23,9 +21,9 @@ const Header= () => {
     return (
         <div className='header'>
             <div className='welcome-message'>
-                <span>{displayName? `Hello ${displayName}`: 'Welcome'}</span>
+                <span>{name? `Hello ${name}`: 'Welcome'}</span>
             </div>
-            { uid ?
+            { id ?
                 <div className='sign-out-wrapper'>
                     <FormButton {...signOutButtonProps}/>
                 </div>
