@@ -13,6 +13,9 @@ const User = () => {
         title: 'User Profile',
         validationSchema: yup.object({
             name: yup.string().required(),
+            avatar: yup.mixed().test('avatar', 'Must not be Empty', (files) => {
+                return files.length;
+            })
         }),
         defaultValues: {
             name

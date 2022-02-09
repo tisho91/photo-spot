@@ -22,12 +22,18 @@ export const fileUpload = multer({
         metadata: function (req: any, file: any, cb: any) {
             cb(null, { fieldName: file.fieldname });
         },
+
         key: function (req: any, file: any, cb: any) {
             const { userId } = req.params;
             const ext = MIME_TYPE_MAP[file.mimetype];
             cb(null, `images/${ userId }/avatar.${ ext }`)
         }
-    })
+    }),
+    fileFilter: (req: any, file: any, cb: any) => {
+        const isValid = !!MIME_TYPE_MAP[file.mimetype];
+        let error = isValid ? null : 'Not valid file'
+        cb(error, isValid)
+    },
 });
 
 
