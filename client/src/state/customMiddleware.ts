@@ -4,6 +4,7 @@ export const customMiddleware = (store: any) => (next: any) => async (action: an
         localStorage.setItem('uid', action.payload.uid);
         localStorage.setItem('token', action.payload.token);
         localStorage.setItem('tokenExpirationDate', action.payload.tokenExpirationDate);
+
     }
 
     if (action.type === LOGOUT_OUT_ACTION) {
