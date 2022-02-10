@@ -16,7 +16,7 @@ export function authGuard(req: Request, res: Response, next: NextFunction) {
         }
         const privateKey = process.env.JWT_PRIVATE_KEY as string;
         const decodedToken: any = verify(token, privateKey);
-        req.body.userId = decodedToken.userId
+        req.params.userId = decodedToken.userId;
         next();
     } catch (error) {
         return next(error)

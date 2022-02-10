@@ -28,7 +28,7 @@ export async function createUser(input: DocumentDefinition<IUser>) {
     try {
         await user.save();
         return {
-            userId: user.id, email: user.email
+            id: user.id
         }
     } catch (error) {
         throw new HttpError('DB Error', 500);
@@ -48,10 +48,39 @@ export async function signIn(email: string, password: string) {
     }
     try {
         return {
-            userId: user.id, email: user.email
+            id: user.id
         }
     } catch (error) {
         throw new HttpError('DB Error', 500);
+    }
+}
+
+export async function getUserByToken(userId: string) {
+    try {
+        const user = await User.findById(userId, '-password')
+        return user?.toObject({ getters: true })
+    } catch (error) {
+        throw error
+    }
+}
+
+export async function updateProfile(userId: string, name: string, avatar: string) {
+    try {
+        const user = await User.findById(userId, '-password');
+        if (!user) {
+            throw new HttpError('Cannot edit bro', 401)
+        }
+        user.name = name;
+        user.avatar = avatar;
+
+        try {
+            await user.save();
+        } catch (error) {
+            throw error
+        }
+        return user.toObject({ getters: true })
+    } catch (error) {
+        throw error
     }
 }
 

@@ -39,7 +39,7 @@ export async function createNewSpotHandler(req: Request, res: Response, next: Ne
     if (!errors.isEmpty()) {
         return next(new HttpError('Invalid input', 402))
     }
-    const input = { ...req.body, creator: req.body.userId };
+    const input = { ...req.body, creator: req.params.userId };
     try {
         const spot = await createNewSpot(input)
         res.status(201).json({ spot })
@@ -56,7 +56,7 @@ export async function updateSpotHandler(req: Request, res: Response, next: NextF
     }
     const { title, description } = req.body;
     const spotId = req.params.spotId;
-    const userId = req.body.userId;
+    const userId = req.params.userId;
 
     try {
         const spot = await updateSpot(title, description, spotId, userId)
@@ -70,7 +70,7 @@ export async function updateSpotHandler(req: Request, res: Response, next: NextF
 
 export async function deleteSpotHandler(req: Request, res: Response, next: NextFunction) {
     const spotId = req.params.spotId;
-    const userId = req.body.userId;
+    const userId = req.params.userId;
 
     try {
         await deleteSpot(spotId, userId);

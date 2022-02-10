@@ -1,16 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { logOut } from '../services/firebase';
-import { login, register } from '../services/auth';
-import { stat } from 'fs';
+import { getCurrentUser, login, register, updateUserProfile } from '../services/auth';
 
-const uid = localStorage.getItem('uid')
 const token = localStorage.getItem('token')
 
 const initialState = {
-    uid,
-    token: '',
-    email: '',
-    tokenExpirationDate: null
+    token,
+    user: {}
 };
 
 
@@ -30,16 +25,21 @@ export const sendLoginRequest = createAsyncThunk(
     }
 );
 
-export const sendLogoutRequest = createAsyncThunk(
-    'auth/logout',
-    async (data, thunkAPI) => {
+export const getCurrentUserDataRequest = createAsyncThunk(
+    'auth/getUserData',
+    async (data: void, thunkAPI) => {
         try {
-            return '';
+            const response: any = await getCurrentUser();
+            const data = await response.json()
+            if (!response.ok) {
+                return thunkAPI.rejectWithValue({ error: data.message });
+            }
+            return { ...data };
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
     }
-);
+)
 
 
 export const sendRegisterRequest = createAsyncThunk(
@@ -59,39 +59,60 @@ export const sendRegisterRequest = createAsyncThunk(
 )
 
 
+export const sendUpdateProfileRequest = createAsyncThunk(
+    'user/updateProfile',
+    async ({ name, avatar }: any, thunkAPI) => {
+        try {
+            const response: any = await updateUserProfile(name, avatar);
+            const data = await response.json()
+            if (!response.ok) {
+                return thunkAPI.rejectWithValue({ error: data.message });
+            }
+            return { ...data };
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue({ error: error.message });
+        }
+    }
+);
+
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.token = null
+            state.user = {};
+        }
+    },
     extraReducers: (builder: any) => {
         builder.addCase(sendLoginRequest.rejected, (state: any, action: any) => {
-            console.log(action)
-            state.isLoading = false;
             return state;
         })
         builder.addCase(sendLoginRequest.fulfilled, (state: any, action: any) => {
-            state.uid = action.payload.userId;
-            state.isLoading = false;
-            state.tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60).toISOString();;
-            return state
-        });
-        builder.addCase(sendLoginRequest.pending, (state: any) => {
-            state.isLoading = true;
-            return state;
-        });
-        builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
-            state.uid = action.payload.userId;
-            state.email = action.payload.email
-            state.tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60).toISOString();
             state.token = action.payload.token;
             return state
         });
-        builder.addCase(sendLogoutRequest.fulfilled, (state: any, action: any) => {
-            state.uid = ''
+        builder.addCase(sendLoginRequest.pending, (state: any) => {
             return state;
         });
+        builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
+            state.token = action.payload.token;
+            return state
+        });
+        builder.addCase(getCurrentUserDataRequest.fulfilled, (state: any, action: any) => {
+            state.user = action.payload.user;
+            return state;
+        });
+        builder.addCase(sendUpdateProfileRequest.fulfilled, (state: any, action: any) => {
+            state.user = action.payload.user;
+            return state;
+        })
     }
 });
 
 export const authSelector = (state: any) => state.auth;
+export const userSelector = (state: any) => state.auth.user;
+const { actions } = authSlice
+export const { logout } = actions;
 export default authSlice.reducer;
