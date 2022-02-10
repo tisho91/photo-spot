@@ -1584,6 +1584,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@googlemaps/js-api-loader@npm:^1.7.0":
+  version: 1.13.5
+  resolution: "@googlemaps/js-api-loader@npm:1.13.5"
+  dependencies:
+    fast-deep-equal: ^3.1.3
+  checksum: e145b573fa62d136e9e42b4e07a58f25edbf5552e245b4cd8692b3ddec42bb550a2e7010df4bc4333e55aa24366784fcf8223428fcd87862ba5e4a29a48bae1c
+  languageName: node
+  linkType: hard
+
 "@hapi/address@npm:2.x.x":
   version: 2.1.4
   resolution: "@hapi/address@npm:2.1.4"
@@ -1885,6 +1894,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mapbox/point-geometry@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@mapbox/point-geometry@npm:0.1.0"
+  checksum: ed41c1ce0140de81039424415d9a199abba72cdb2287314e1b8c3e295da3224f7e8c1b0ae99a9b097703e7abe63e1978a518e29896989cc8bba3d482360bc22f
+  languageName: node
+  linkType: hard
+
 "@material-ui/core@npm:^4.12.3":
   version: 4.12.3
   resolution: "@material-ui/core@npm:4.12.3"
@@ -2062,6 +2078,7 @@ __metadata:
     react-router-dom: ^5.3.0
     react-scripts: 4.0.3
     sass: ^1.42.1
+    source-map-loader: ^1.0.0
     typescript: ^4.1.2
     web-vitals: ^1.0.1
     yup: ^0.32.9
@@ -2591,6 +2608,22 @@ __metadata:
     "@types/minimatch": "*"
     "@types/node": "*"
   checksum: 6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
+  languageName: node
+  linkType: hard
+
+"@types/google-map-react@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "@types/google-map-react@npm:2.1.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: a479ff03038467a349bb8682af0866216babb29281692e8f9ee95070c345bfb3b9bfa7624bd970421578b576fb480737c9e759c7634163b2e435722031e289c3
+  languageName: node
+  linkType: hard
+
+"@types/google.maps@npm:^3.47.4":
+  version: 3.47.4
+  resolution: "@types/google.maps@npm:3.47.4"
+  checksum: 343a7e631816e7cc7afc3a5bfde4b9b0599de6a2abf1f77c5bd51aeebf7e3f4cbe7ff31c58307ee14dcd872a2d2a0096eca6524a5104cbe3ff08102444fb7d7e
   languageName: node
   linkType: hard
 
@@ -7341,7 +7374,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eventemitter3@npm:^4.0.0":
+"eventemitter3@npm:^4.0.0, eventemitter3@npm:^4.0.4":
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
   checksum: 1875311c42fcfe9c707b2712c32664a245629b42bb0a5a84439762dd0fd637fc54d078155ea83c2af9e0323c9ac13687e03cfba79b03af9f40c89b4960099374
@@ -8336,6 +8369,21 @@ __metadata:
     lodash: ~4.17.10
     minimatch: ~3.0.2
   checksum: 424b0503791fcaec526aff9a68fd08b6360fd4ec6a406a624ba385d410f3f363e8a1ee7d7fb2ef6448b7f5cd6458256ea08f4b9ef32dbd222977956a6171fc6b
+  languageName: node
+  linkType: hard
+
+"google-map-react@npm:^2.1.10":
+  version: 2.1.10
+  resolution: "google-map-react@npm:2.1.10"
+  dependencies:
+    "@googlemaps/js-api-loader": ^1.7.0
+    "@mapbox/point-geometry": ^0.1.0
+    eventemitter3: ^4.0.4
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: 0e0d0639e83eda3f14bd0bc946e0bfccd65f053aed790f6113d8625e7a70d428d10ad68f374feafb6787f5dfcf9d785c67ab4b9d2315d2860a6f9db02a230f97
   languageName: node
   linkType: hard
 
@@ -12789,7 +12837,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "photo-spot@workspace:."
   dependencies:
+    "@types/google-map-react": ^2.1.4
+    "@types/google.maps": ^3.47.4
     concurrently: ^6.0.2
+    google-map-react: ^2.1.10
   languageName: unknown
   linkType: soft
 
@@ -15697,6 +15748,22 @@ __metadata:
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c
+  languageName: node
+  linkType: hard
+
+"source-map-loader@npm:^1.0.0":
+  version: 1.1.3
+  resolution: "source-map-loader@npm:1.1.3"
+  dependencies:
+    abab: ^2.0.5
+    iconv-lite: ^0.6.2
+    loader-utils: ^2.0.0
+    schema-utils: ^3.0.0
+    source-map: ^0.6.1
+    whatwg-mimetype: ^2.3.0
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 0ca16a1458f206e12925f242ce52913b5f35de657d2ec17fd60ab3de7fa85b72b6707951b7a18899bdf05679d679a8b9edeb660c557aafa66453886d6907e3ec
   languageName: node
   linkType: hard
 

@@ -5,22 +5,31 @@ import { Redirect, Route } from 'react-router-dom';
 import Auth from '../components/Auth/Auth';
 import HomePage from '../components/home/HomePage';
 import { PrivateRoute } from '../PrivateRoute';
-import { AUTH, EDIT_USER, HOME } from '../constants/routes';
+import { AUTH, EDIT_USER, HOME, SPOT_LIST, SPOT_LIST_ITEM } from '../constants/routes';
 import User from '../components/Auth/user/User';
+import SpotList from '../components/spots/SpotList';
+import Spot from '../components/spots/Spot';
+import { getAllSpotsRequest } from '../state/spotSlice';
 
 const AppRoutes = () => {
-    const dispatch = useDispatch()
     const { token } = useSelector(authSelector);
+    const dispatch = useDispatch();
+    useEffect(() => {
+
+    }, [ dispatch ])
     useEffect(() => {
         if (!!token) {
-            dispatch(getCurrentUserDataRequest())
+            dispatch(getCurrentUserDataRequest());
+            dispatch(getAllSpotsRequest())
         }
-    }, [ token ])
+    }, [ token,dispatch ])
 
 
     return (
         <div>
             <PrivateRoute path={ HOME } component={ HomePage } exact/>
+            <PrivateRoute path={ SPOT_LIST } component={ SpotList } exact/>
+            <PrivateRoute path={ SPOT_LIST_ITEM } component={ Spot } exact/>
             <PrivateRoute path={ EDIT_USER } component={ User } exact/>
             <Route path={ AUTH } component={ Auth }/>
             {

@@ -39,4 +39,5 @@ export const spotSlice = createSlice({
 })
 
 export const spotsSelector = (state: any) => state.spots;
+export const findSpotByIdSelector = (spotId: string) => (state: any) => state.spots.spots.find((spot: any) => spot.id === spotId);
 export default spotSlice.reducer;
