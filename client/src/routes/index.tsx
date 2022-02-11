@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelector, getCurrentUserDataRequest } from '../state/authSlice';
 import { Redirect, Route } from 'react-router-dom';
-import Auth from '../components/Auth/Auth';
+// import auth from '../components/auth/auth';
 import HomePage from '../components/home/HomePage';
 import { PrivateRoute } from '../PrivateRoute';
-import { AUTH, EDIT_USER, HOME, SPOT_LIST, SPOT_LIST_ITEM } from '../constants/routes';
-import User from '../components/Auth/user/User';
+import {  EDIT_USER, HOME, SPOT_LIST, SPOT_LIST_ITEM } from '../constants/routes';
+import User from '../components/auth/user/User';
 import SpotList from '../components/spots/SpotList';
 import Spot from '../components/spots/Spot';
 import { getAllSpotsRequest } from '../state/spotSlice';
@@ -31,7 +31,7 @@ const AppRoutes = () => {
             <PrivateRoute path={ SPOT_LIST } component={ SpotList } exact/>
             <PrivateRoute path={ SPOT_LIST_ITEM } component={ Spot } exact/>
             <PrivateRoute path={ EDIT_USER } component={ User } exact/>
-            <Route path={ AUTH } component={ Auth }/>
+            {/*<Route path={ AUTH } component={ auth }/>*/}
             {
                 !!token ? <Redirect to={ HOME }/> : null
             }
