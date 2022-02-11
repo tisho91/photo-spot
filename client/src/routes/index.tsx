@@ -22,7 +22,7 @@ const AppRoutes = () => {
             dispatch(getCurrentUserDataRequest());
             dispatch(getAllSpotsRequest())
         }
-    }, [ token,dispatch ])
+    }, [ token, dispatch ])
 
 
     return (
