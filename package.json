@@ -18,17 +18,13 @@
     "heroku-postbuild": "yarn build-app"
   },
   "dependencies": {
-    "@types/google-map-react": "^2.1.4",
-    "concurrently": "^6.0.2",
-    "google-map-react": "^2.1.10"
+    "concurrently": "^6.0.2"
+
   },
   "engines": {
     "node": "16.13.0"
   },
   "author": "",
   "license": "ISC",
-  "packageManager": "yarn@3.1.1",
-  "devDependencies": {
-    "@types/google.maps": "^3.47.4"
-  }
+  "packageManager": "yarn@3.1.1"
 }
