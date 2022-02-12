@@ -1,10 +1,7 @@
 export const customMiddleware = (store: any) => (next: any) => async (action: any) => {
     if ([ LOGIN_FULFILLED_ACTION, REGISTER_FULFILLED_ACTION ].includes(action.type)) {
-        localStorage.setItem('email', action.payload.email);
-        localStorage.setItem('uid', action.payload.uid);
         localStorage.setItem('token', action.payload.token);
         localStorage.setItem('tokenExpirationDate', action.payload.tokenExpirationDate);
-
     }
 
     if (action.type === LOGOUT_OUT_ACTION) {
