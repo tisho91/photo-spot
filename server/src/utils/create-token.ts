@@ -9,10 +9,11 @@ export const createToken = (userId: string): any => {
         { expiresIn }
     )
     const { exp } = (verify(token, privateKey) as JwtPayload);
-
+    const tokenExpirationDate = new Date(0);
+    tokenExpirationDate.setUTCSeconds(exp as number)
 
     return {
         token,
-        tokenExpirationDate: exp
+        tokenExpirationDate: tokenExpirationDate.toISOString()
     }
 }
