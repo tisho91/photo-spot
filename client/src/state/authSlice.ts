@@ -29,9 +29,7 @@ export const sendLoginRequest = createAsyncThunk(
             if (!response.ok) {
                 return thunkAPI.rejectWithValue({ error: data.message });
             }
-            const tokenExpirationDate = new Date(0);
-            tokenExpirationDate.setUTCSeconds(data.tokenExpirationDate)
-            return { ...data, tokenExpirationDate: tokenExpirationDate.toISOString() };
+            return { ...data };
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -64,9 +62,7 @@ export const sendRegisterRequest = createAsyncThunk(
             if (!response.ok) {
                 return thunkAPI.rejectWithValue({ error: data.message });
             }
-            const tokenExpirationDate = new Date(0);
-            tokenExpirationDate.setUTCSeconds(data.tokenExpirationDate)
-            return { ...data, tokenExpirationDate: tokenExpirationDate.toISOString() };
+            return { ...data };
 
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
