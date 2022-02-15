@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getCurrentUser, login, register, updateUserProfile } from '../services/auth';
 
-const token = localStorage.getItem('token')
+let tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
+let token = localStorage.getItem('token');
+
+if (tokenExpirationDate) {
+    const tokenExpiration = new Date(tokenExpirationDate);
+    if (tokenExpiration < new Date()) {
+        token = null;
+        tokenExpirationDate = null;
+    }
+}
+
 
 const initialState = {
     token,
+    tokenExpirationDate,
     user: {}
 };
 
@@ -32,7 +43,7 @@ export const getCurrentUserDataRequest = createAsyncThunk(
             const response: any = await getCurrentUser();
             const data = await response.json()
             if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message });
+                return thunkAPI.rejectWithValue({ error: data.message.name });
             }
             return { ...data };
         } catch (error: any) {
@@ -52,6 +63,7 @@ export const sendRegisterRequest = createAsyncThunk(
                 return thunkAPI.rejectWithValue({ error: data.message });
             }
             return { ...data };
+
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -91,6 +103,7 @@ export const authSlice = createSlice({
         })
         builder.addCase(sendLoginRequest.fulfilled, (state: any, action: any) => {
             state.token = action.payload.token;
+            state.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
         });
         builder.addCase(sendLoginRequest.pending, (state: any) => {
@@ -98,6 +111,7 @@ export const authSlice = createSlice({
         });
         builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
             state.token = action.payload.token;
+            state.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
         });
         builder.addCase(getCurrentUserDataRequest.fulfilled, (state: any, action: any) => {

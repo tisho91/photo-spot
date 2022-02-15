@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, getCurrentUserDataRequest } from '../state/authSlice';
+import { authSelector, getCurrentUserDataRequest, logout } from '../state/authSlice';
 import { Redirect, Route } from 'react-router-dom';
 import Auth from '../components/auth/Auth';
 import HomePage from '../components/home/HomePage';
@@ -15,14 +15,15 @@ const AppRoutes = () => {
     const { token } = useSelector(authSelector);
     const dispatch = useDispatch();
     useEffect(() => {
-
     }, [ dispatch ])
     useEffect(() => {
         if (!!token) {
             dispatch(getCurrentUserDataRequest());
             dispatch(getAllSpotsRequest())
+        } else {
+            dispatch(logout())
         }
-    }, [ token, dispatch ])
+    }, [ token ])
 
 
     return (
