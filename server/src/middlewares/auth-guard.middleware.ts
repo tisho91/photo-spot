@@ -1,7 +1,8 @@
 import { verify } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 
-const HttpError = require('../utils/http-error')
+import { HttpError } from '../utils/http-error';
+
 
 
 export function authGuard(req: Request, res: Response, next: NextFunction) {
