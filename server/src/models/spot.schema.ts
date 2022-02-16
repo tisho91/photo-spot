@@ -8,7 +8,7 @@ const spotSchema: Schema = new Schema({
     description: { type: String, required: false },
     address: { type: String, required: true },
     creator: { type: Types.ObjectId, required: true, ref: 'User' },
-    image: { type: String, required: true },
+    images: [ { type: Types.ObjectId, required: true, ref: 'Image' } ],
     coordinates: {
         lng: { type: Number, required: true },
         lat: { type: Number, required: true }

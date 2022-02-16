@@ -1,16 +1,16 @@
-import { Types } from 'mongoose'
 import { IUser } from './user.model';
+import { IImage } from './image.model';
 
 interface ICoordinates {
     lng: number,
     lat: number
 }
 
-export interface ISpot extends Document{
+export interface ISpot extends Document {
     title: string,
     description: string,
     address: string,
     creator: IUser['_id'],
-    image: string,
+    images:  IImage['_id'],
     coordinates: ICoordinates
 }

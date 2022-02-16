@@ -1,6 +1,7 @@
 export const HOME = '/';
 export const SPOT_LIST = '/spots';
 export const SPOT_LIST_ITEM = '/spots/:id';
+export const ADD_SPOT = '/spots/create';
 export const UPDATE_DISPLAY_NAME = '/update-display-name';
 export const UPDATE_AVATAR = '/update-avatar';
 export const EDIT_USER = '/edit-user'
