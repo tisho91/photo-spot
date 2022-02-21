@@ -1,8 +1,9 @@
 import React from 'react';
-import Form  from '../form/Form';
+import Form from '../form/Form';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';
+import TextInput from '../input/TextInput';
 
 const SpotCreator = () => {
     const dispatch = useDispatch()
@@ -16,46 +17,29 @@ const SpotCreator = () => {
                 return files.length;
             })
         }),
-        submitClickCallback: (spot:any) => {
+        submitClickCallback: (spot: any) => {
             const images = spot.images
-            console.log(images);
-
             for (let i = 0; i < images.length; i++) {
                 const fileReader = new FileReader();
-                fileReader.onload = () => {}
+                fileReader.onload = () => {
+                }
                 fileReader.readAsDataURL(images[i]);
             }
             console.log(images)
             dispatch(createNewSpotRequest({ ...spot, images }));
         },
-        fields: [
-            {
-                id: 'title',
-                type: 'text',
-                name: 'title',
-            }, {
-                id: 'description',
-                type: 'text',
-                name: 'description',
-            }, {
-                id: 'address',
-                type: 'text',
-                name: 'address',
-            },
-            {
-                id: 'images',
-                type: 'file',
-                name: 'images',
-                accept: 'image/png, image/jpeg',
-                multiple: true // TODO - make multiple images per spot
-            }
-        ],
         submitButtonText: 'Submit'
     }
 
     return (
         <div>
-            <Form { ...formDefinition }/>
+            <Form { ...formDefinition }>
+                <TextInput id="title" name="title"/>
+                <TextInput id="description" name="description"/>
+                <TextInput id="address" name="address"/>
+                <TextInput type="file" id="images" name="images"/>
+
+            </Form>
         </div>
     );
 };
