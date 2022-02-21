@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const SpotListItem = (props: any) => {
+    const imgUrl = props.images[0]?.url || 'https://webcolours.ca/wp-content/uploads/2020/10/webcolours-unknown.png'
     return (
         <Link to={ `/spots/${ props.id }` } style={ {
             width: '120px',
@@ -10,7 +11,7 @@ const SpotListItem = (props: any) => {
             <h1 style={ { fontSize: '16px' } }>{ props.title }</h1>
             <img style={ {
                 width: '100px', height: '100px'
-            } } src={ props.images[0].url }/>
+            } } src={ imgUrl }/>
         </Link>
     )
 }
