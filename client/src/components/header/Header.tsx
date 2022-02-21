@@ -1,5 +1,4 @@
 import React from 'react';
-import './Header.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, userSelector } from '../../state/authSlice';
 import FormButton from '../formButton/FormButton';
