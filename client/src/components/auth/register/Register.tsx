@@ -1,31 +1,13 @@
 import React from 'react';
 import Form from '../../form/Form';
 import * as yup from 'yup';
-import { sendRegisterRequest } from '../../../state/authSlice';
+import { sendLoginRequest, sendRegisterRequest } from '../../../state/authSlice';
 import { useDispatch } from 'react-redux';
+import TextInput from '../../input/TextInput';
 
 const Register = () => {
     const dispatch = useDispatch();
-
     const formDefinition = {
-        title: 'Register',
-        fields: [
-            {
-                id: 'name',
-                type: 'text',
-                name: 'name',
-            },
-            {
-                id: 'email',
-                type: 'email',
-                name: 'email',
-            },
-            {
-                id: 'password',
-                type: 'password',
-                name: 'password',
-            }
-        ],
         validationSchema: yup.object({
             name: yup.string().required(),
             email: yup.string().required().email(),
@@ -34,11 +16,14 @@ const Register = () => {
         submitClickCallback: async (data: any) => {
             dispatch(sendRegisterRequest(data));
         },
-        submitButtonText: 'Register'
-    };
+    }
     return (
         <div className='register-form'>
-            <Form {...formDefinition}/>
+            <Form {...formDefinition}>
+                <TextInput id="name" name="name"/>
+                <TextInput type='email' id="email" name="email"/>
+                <TextInput type="password" id="password" name="password"/>
+            </Form>
         </div>
     );
 };

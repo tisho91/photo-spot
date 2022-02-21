@@ -1,12 +1,12 @@
 import React from 'react';
-import Form, { FormDefinition } from '../form/Form';
+import Form  from '../form/Form';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';
 
 const SpotCreator = () => {
     const dispatch = useDispatch()
-    const formDefinition: FormDefinition = {
+    const formDefinition = {
         title: 'Create Spot',
         validationSchema: yup.object({
             title: yup.string().required(),
@@ -16,7 +16,7 @@ const SpotCreator = () => {
                 return files.length;
             })
         }),
-        submitClickCallback: (spot) => {
+        submitClickCallback: (spot:any) => {
             const images = spot.images
             console.log(images);
 

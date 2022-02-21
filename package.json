@@ -25,8 +25,5 @@
   },
   "author": "",
   "license": "ISC",
-  "packageManager": "yarn@3.1.1",
-  "devDependencies": {
-    "@types/uuid": "^8.3.4"
-  }
+  "packageManager": "yarn@3.1.1"
 }
