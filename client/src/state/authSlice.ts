@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCurrentUser, login, register, updateUserProfile } from '../services/auth';
+import httpService from '../services/http.service';
+import createFormData from '../utils/createFormData';
 
 let tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
 let token = localStorage.getItem('token');
@@ -24,12 +25,8 @@ export const sendLoginRequest = createAsyncThunk(
     'auth/login',
     async (loginData: any, thunkAPI) => {
         try {
-            const response: any = await login(loginData);
-            const data = await response.json()
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message });
-            }
-            return { ...data };
+            const response: any = await httpService.post('/users/login', loginData);
+            return response.data
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -40,12 +37,8 @@ export const getCurrentUserDataRequest = createAsyncThunk(
     'auth/getUserData',
     async (data: void, thunkAPI) => {
         try {
-            const response: any = await getCurrentUser();
-            const data = await response.json()
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message.name });
-            }
-            return { ...data };
+            const response: any = await httpService.get('/users/me');
+            return response.data
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -57,13 +50,8 @@ export const sendRegisterRequest = createAsyncThunk(
     'auth/register',
     async (userData: any, thunkAPI) => {
         try {
-            const response: any = await register(userData);
-            const data = await response.json()
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message });
-            }
-            return { ...data };
-
+            const response: any = await httpService.post('/users/signup', userData);
+            return response.data;
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -73,14 +61,10 @@ export const sendRegisterRequest = createAsyncThunk(
 
 export const sendUpdateProfileRequest = createAsyncThunk(
     'user/updateProfile',
-    async ({ name, avatar }: any, thunkAPI) => {
+    async (data: any, thunkAPI) => {
         try {
-            const response: any = await updateUserProfile(name, avatar);
-            const data = await response.json()
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message });
-            }
-            return { ...data };
+            const response: any = await httpService.patch('/users/me', createFormData(data));
+            return response.data;
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }

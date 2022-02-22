@@ -60,7 +60,6 @@ export async function createNewSpot(input: DocumentDefinition<ISpot>) {
     try {
         coordinates = await getCoordinatesForAddress(address);
     } catch (error) {
-        console.log('Google errorr', error)
         throw error
     }
     const images = await addImages(input.images, creator)

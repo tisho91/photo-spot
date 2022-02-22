@@ -37,7 +37,6 @@ export async function getSpotsByUserIdHandler(req: Request, res: Response, next:
 export async function createNewSpotHandler(req: any, res: any, next: any) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors)
         return next(new HttpError('Invalid input', 402))
     }
 

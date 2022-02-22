@@ -1,19 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import { customMiddleware } from './customMiddleware';
-import statusReducer from './statusSlice';
 import spotsReducer from './spotSlice';
-import { apiSlice } from './apiSlice';
 
 const store = configureStore({
     reducer: {
         auth: authReducer,
-
-        status: statusReducer,
-        spots: spotsReducer,
-        [apiSlice.reducerPath]: apiSlice.reducer
+        spots: spotsReducer
     },
-    middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(customMiddleware, apiSlice.middleware),
+    middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(customMiddleware),
 });
 
 export default store;

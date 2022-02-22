@@ -3,7 +3,6 @@ import React from 'react';
 
 const TextInput = (props: any) => {
     const { register, errors } = props;
-    console.log(errors)
     return (
         <FormControl >
             <TextField
