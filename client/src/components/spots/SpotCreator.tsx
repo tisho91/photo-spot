@@ -25,7 +25,6 @@ const SpotCreator = () => {
                 }
                 fileReader.readAsDataURL(images[i]);
             }
-            console.log(images)
             dispatch(createNewSpotRequest({ ...spot, images }));
         },
         submitButtonText: 'Submit'

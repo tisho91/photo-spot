@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createNewSpot, getAllSpots } from '../services/spots'
+import httpService from '../services/http.service';
+import createFormData from '../utils/createFormData';
+
 
 const initialState = {
     spots: []
@@ -7,14 +9,10 @@ const initialState = {
 
 export const createNewSpotRequest = createAsyncThunk(
     'spots/createNewSpot',
-    async (formData: any, thunkAPI) => {
+    async (data: any, thunkAPI) => {
         try {
-            const response: any = await createNewSpot(formData)
-            const data = await response.json();
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data });
-            }
-            return data;
+            const response: any = await httpService.post('/spots', createFormData(data));
+            return response.data;
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
@@ -25,12 +23,8 @@ export const getAllSpotsRequest = createAsyncThunk(
     'spots/getAllSpots',
     async (data: void, thunkAPI) => {
         try {
-            const response: any = await getAllSpots()
-            const data = await response.json();
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data });
-            }
-            return data;
+            const response: any = await httpService.get('/spots');
+            return response.data;
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
