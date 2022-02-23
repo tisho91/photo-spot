@@ -4,6 +4,8 @@ import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';
 import TextInput from '../input/TextInput';
+import GoogleAutocomplete from '../input/GoogleAutocomplete';
+import ImageInput from '../input/ImageInput';
 
 const SpotCreator = () => {
     const dispatch = useDispatch()
@@ -35,9 +37,8 @@ const SpotCreator = () => {
             <Form { ...formDefinition }>
                 <TextInput id="title" name="title"/>
                 <TextInput id="description" name="description"/>
-                <TextInput id="address" name="address"/>
-                <TextInput type="file" id="images" name="images"/>
-
+                <GoogleAutocomplete id="address" name="address"/>
+                <ImageInput id="images" name="images" multiple/>
             </Form>
         </div>
     );

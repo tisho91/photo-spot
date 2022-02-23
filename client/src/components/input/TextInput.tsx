@@ -1,20 +1,21 @@
 import { FormControl, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { memo } from 'react';
 
-const TextInput = (props: any) => {
+const TextInput = memo((props: any) => {
     const { register, errors } = props;
     return (
-        <FormControl >
+        <FormControl>
             <TextField
-                error={ !!errors }
-                { ...register(props.id) }
+                inputProps={ { autoComplete: 'off' } }
                 type={ props.type }
                 id={ props.id }
+                error={ !!errors }
                 helperText={ errors?.message }
+                { ...register(props.id) }
 
             />
         </FormControl>
     );
-};
+});
 
 export default TextInput;

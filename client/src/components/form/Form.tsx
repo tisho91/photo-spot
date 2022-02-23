@@ -6,7 +6,7 @@ import React from 'react';
 
 const Form = (props: any) => {
     const { submitClickCallback, validationSchema, submitButtonText, children, defaultValues } = props;
-    const { handleSubmit, register, formState: { errors } } = useForm<any>({
+    const { handleSubmit, register, formState: { errors }, setValue } = useForm<any>({
         defaultValues,
         resolver: yupResolver(validationSchema)
     });
@@ -18,6 +18,7 @@ const Form = (props: any) => {
                 ...child.props,
                 errors: errors[child.props.id],
                 register,
+                setValue,
                 key: child.props.name
             }
         })
