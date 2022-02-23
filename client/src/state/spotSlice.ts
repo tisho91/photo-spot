@@ -38,13 +38,9 @@ export const spotSlice = createSlice({
     reducers: {},
     extraReducers: (builder: any) => {
         builder.addCase(createNewSpotRequest.fulfilled, (state: any, action: any) => {
-            console.log(action.payload)
-            // state.spots = action.payload.spots;
             return state;
         })
         builder.addCase(createNewSpotRequest.rejected, (state: any, action: any) => {
-            console.log(action.payload)
-            // state.spots = action.payload.spots;
             return state;
         })
         builder.addCase(getAllSpotsRequest.fulfilled, (state: any, action: any) => {

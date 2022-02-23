@@ -6,6 +6,7 @@ import { sendUpdateProfileRequest, userSelector } from '../../../state/authSlice
 import { HOME } from '../../../constants/routes';
 import { Link } from 'react-router-dom';
 import TextInput from '../../input/TextInput';
+import ImageInput from '../../input/ImageInput';
 
 const User = () => {
     const { name } = useSelector(userSelector)
@@ -37,8 +38,7 @@ const User = () => {
         <div>
             <Form { ...formDefinition } >
                 <TextInput id="name" name="name"/>
-                <TextInput type='file' id="avatar" name="avatar"/>
-
+                <ImageInput id="avatar" name="avatar"/>
             </Form>
             <Link to={ HOME }>go back</Link>
         </div>
