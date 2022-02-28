@@ -12,6 +12,7 @@ export async function getCurrentUser(req: any, res: any, next: any) {
     }
 }
 
+
 export async function signup(req: any, res: any, next: any) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -19,7 +20,7 @@ export async function signup(req: any, res: any, next: any) {
     }
     try {
         const user = await createUser(req.body);
-        let token = createToken(user.id);
+        let { token, tokenExpirationDate } = createToken(user.id);
         res.status(201).json({ token })
     } catch (error) {
         return next(error)
@@ -30,8 +31,8 @@ export async function login(req: any, res: any, next: any) {
     const { email, password } = req.body;
     try {
         const user = await signIn(email, password)
-        const token = createToken(user.id);
-        res.status(201).json({ token })
+        const { token, tokenExpirationDate } = createToken(user.id);
+        res.status(201).json({ token, tokenExpirationDate })
     } catch (error) {
         return next(error)
     }

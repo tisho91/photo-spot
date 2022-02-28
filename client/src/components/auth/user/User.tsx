@@ -1,15 +1,17 @@
-import Form, { FormDefinition } from '../../form/Form';
+import Form  from '../../form/Form';
 import * as yup from 'yup';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendUpdateProfileRequest, userSelector } from '../../../state/authSlice';
 import { HOME } from '../../../constants/routes';
 import { Link } from 'react-router-dom';
+import TextInput from '../../input/TextInput';
+import ImageInput from '../../input/ImageInput';
 
 const User = () => {
     const { name } = useSelector(userSelector)
     const dispatch = useDispatch();
-    const formDefinition: FormDefinition = {
+    const formDefinition = {
         title: 'User Profile',
         validationSchema: yup.object({
             name: yup.string().required(),
@@ -20,7 +22,7 @@ const User = () => {
         defaultValues: {
             name
         },
-        submitClickCallback: (user) => {
+        submitClickCallback: (user:any) => {
             const avatar = user.avatar[0];
             const fileReader = new FileReader();
             fileReader.onload = () => {
@@ -28,27 +30,16 @@ const User = () => {
             fileReader.readAsDataURL(avatar);
             dispatch(sendUpdateProfileRequest({ name: user.name, avatar }));
         },
-        fields: [
-            {
-                id: 'name',
-                type: 'text',
-                name: 'name',
-            },
-            {
-                id: 'avatar',
-                type: 'file',
-                name: 'avatar',
-                accept: 'image/png, image/jpeg',
-                multiple: false
-            }
-        ],
         submitButtonText: 'Submit'
     }
 
 
     return (
         <div>
-            <Form { ...formDefinition } />
+            <Form { ...formDefinition } >
+                <TextInput id="name" name="name"/>
+                <ImageInput id="avatar" name="avatar"/>
+            </Form>
             <Link to={ HOME }>go back</Link>
         </div>
     )

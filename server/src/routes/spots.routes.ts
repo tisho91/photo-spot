@@ -9,20 +9,23 @@ import {
     getSpotsByUserIdHandler,
     updateSpotHandler
 } from '../controllers/spots.controller';
+import { fileUploadMultiple } from '../middlewares/file-upload.middleware';
 
 const router = express.Router();
-router.use(authGuard);
-router.get('/:spotId', getSpotByIdHandler);
-router.get('/user/:uid', getSpotsByUserIdHandler);
-router.get('/', getAllSpotsHandler)
+router.get('/user/:uid', authGuard, getSpotsByUserIdHandler);
+router.get('/:spotId', authGuard, getSpotByIdHandler);
+router.get('/', authGuard, getAllSpotsHandler)
 router.post('/', [
+    authGuard,
+    fileUploadMultiple,
     check('title').notEmpty(),
     check('address').notEmpty()
 ], createNewSpotHandler)
 router.patch('/:spotId', [
+    authGuard,
     check('title').notEmpty(),
     check('description').isLength({ min: 5 })
 ], updateSpotHandler)
-router.delete('/:spotId', deleteSpotHandler)
+router.delete('/:spotId', authGuard, deleteSpotHandler)
 
 export default router;

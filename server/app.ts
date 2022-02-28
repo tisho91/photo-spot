@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(corsMiddleware);
 }
 
-app.use(express.static(join(__dirname,'../../client/build')))
+app.use(express.static(join(__dirname, '../../client/build')))
 app.use(router);
 app.use((req, res, next) => {
     res.sendFile(resolve(__dirname, '../../client/build', 'index.html'))
@@ -23,8 +23,9 @@ app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
     if (res.headersSent) {
         return next(error)
     }
+    console.log(error)
     res.status(error.code || 500);
-    res.json({ message: error || 'An unknown error occurred!' })
+    res.json({ message: error.message || 'An unknown error occurred!' })
 
 });
 mongoose.connect(dbConfig.url).then(() => {

@@ -34,12 +34,15 @@ export async function getSpotsByUserIdHandler(req: Request, res: Response, next:
     }
 }
 
-export async function createNewSpotHandler(req: Request, res: Response, next: NextFunction) {
+export async function createNewSpotHandler(req: any, res: any, next: any) {
+    console.log(req.files)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return next(new HttpError('Invalid input', 402))
     }
-    const input = { ...req.body, creator: req.params.userId };
+
+    const images = req.files.map((image: any) => image.location)
+    const input = { ...req.body, creator: req.params.userId, images };
     try {
         const spot = await createNewSpot(input)
         res.status(201).json({ spot })

@@ -1,13 +1,13 @@
 import Spot from '../models/spot.schema'
 import { HttpError } from '../utils/http-error';
 import User from '../models/user.schema';
-import { getCoordinatesForAddress } from '../utils/location';
+import Image from '../models/image.schema';
 import mongoose, { DocumentDefinition } from 'mongoose';
 import { ISpot } from '../models/spot.model';
 
 
 export async function getAllSpots() {
-    const spots = await Spot.find().exec();
+    const spots = await Spot.find().populate('images');
     return spots.map((spot: any) => spot.toObject({ getters: true }));
 }
 
@@ -37,24 +37,33 @@ export async function getSpotsByUserId(userId: string) {
     }
 }
 
+export async function addImages(images: string[], uploader: string) {
+    const createdImages = images.map(image => new Image({
+        uploader,
+        url: image,
+        upVotes: 0,
+        downVotes: 0
+    }))
+    try {
+        await Image.insertMany(createdImages)
+        return createdImages.map((image: any) => image.toObject({ getters: true }))
+    } catch (error) {
+        throw error;
+    }
+}
 
 export async function createNewSpot(input: DocumentDefinition<ISpot>) {
-    const { title, description, address, image, creator } = input;
-    let coordinates;
-    try {
-        coordinates = await getCoordinatesForAddress(address);
-    } catch (error) {
-        throw error
-    }
+    const { title, description, address, creator, coordinates } = input;
+    const images = await addImages(input.images, creator)
+
     const createdSpot = new Spot({
         title,
         description,
         address,
-        image,
+        images,
         creator,
         coordinates
     });
-
     try {
         const user = await User.findById(creator);
         if (!user) {
@@ -69,9 +78,10 @@ export async function createNewSpot(input: DocumentDefinition<ISpot>) {
             await session.commitTransaction()
 
         } catch (error) {
+            console.log('other errorr', error)
             throw error
         }
-        return createdSpot.toObject({ getters: true });
+        return { ...createdSpot.toObject({ getters: true }), images }
     } catch (error) {
         throw new HttpError('User not found', 401);
     }

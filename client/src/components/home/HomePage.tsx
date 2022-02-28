@@ -1,26 +1,20 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllSpotsRequest, spotsSelector } from '../../state/spotSlice';
 import { EDIT_USER } from '../../constants/routes';
 import { userSelector } from '../../state/authSlice';
+import SpotList from '../spots/SpotList';
+import GoogleAutocomplete from '../input/GoogleAutocomplete';
 
 
 const HomePage = () => {
-    const { spots } = useSelector(spotsSelector)
     const { avatar } = useSelector(userSelector)
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getAllSpotsRequest())
-    }, [ dispatch ])
     return (
         <div>
             <img style={ { width: '200px', height: '200px' } } src={ avatar }/>
-            { spots.map((spot: any) => {
-                // TODO add spot component
-                return <div key={ spot.id }>{ spot.title }</div>
-            }) }
             <Link to={ EDIT_USER }>Edit Profile</Link>
+            <SpotList/>
+
         </div>
     );
 };

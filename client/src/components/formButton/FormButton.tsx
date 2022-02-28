@@ -1,5 +1,4 @@
 import React from 'react';
-import './FormButton.scss'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     text: string,

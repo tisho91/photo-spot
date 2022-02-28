@@ -1,42 +1,44 @@
-import Input from '../input/Input';
-import FormButton from '../formButton/FormButton';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-export interface FormDefinition {
-    fields: any[],
-    submitClickCallback: (data: any) => void,
-    title?: string,
-    validationSchema: any,
-    submitButtonText: string,
-    defaultValues?: any
-}
+import { LoadingButton } from '@mui/lab';
+import React from 'react';
 
 
-const Form = (props: FormDefinition) => {
-    const { fields, submitClickCallback, title, validationSchema, submitButtonText, defaultValues } = props;
-    const { handleSubmit, register, formState: { errors } } = useForm<any>({
+const Form = (props: any) => {
+    const { submitClickCallback, validationSchema, submitButtonText, children, defaultValues } = props;
+    const { handleSubmit, register, formState: { errors }, setValue } = useForm<any>({
         defaultValues,
         resolver: yupResolver(validationSchema)
     });
     const onSubmit = handleSubmit(data => submitClickCallback(data));
 
+    const renderChildElement = (child: any) => {
+        return React.createElement(child.type, {
+            ...{
+                ...child.props,
+                errors: errors[child.props.id],
+                register,
+                setValue,
+                key: child.props.name
+            }
+        })
+    }
+    const renderChildren = () => {
+        return (Array.isArray(children)
+                ? children.map((child) => {
+                    return child.props.name
+                        ? renderChildElement(child)
+                        : child;
+                })
+                : renderChildElement(children)
+        )
+    }
     return (
         <form onSubmit={ onSubmit }>
-            <h2>{ title }</h2>
-            {
-                fields.map((item: any) =>
-                    <Input
-                        errors={ errors[item.id] }
-                        register={ register }
-                        key={ item.id }
-                        { ...item }
-                    />
-                )
-            }
-            <div className="submit-wrapper">
-                <FormButton className="submit-button" text={ submitButtonText } type="submit"/>
-            </div>
+            { renderChildren() }
+            <LoadingButton fullWidth loading={ false } type="submit" variant="outlined">
+                { submitButtonText || 'text' }
+            </LoadingButton>
         </form>
     );
 };

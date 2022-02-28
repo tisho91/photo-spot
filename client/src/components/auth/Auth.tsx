@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthNavigation from "./AuthNavigation";
 import AuthRouter from "./AuthRouter";
-import './Auth.scss'
 
 const Auth = () => {
     return (
