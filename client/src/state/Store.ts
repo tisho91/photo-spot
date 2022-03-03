@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import { customMiddleware } from './customMiddleware';
+import { localStorageMiddleware, } from './local-storage.middleware';
+import { errorHandlerMiddleware } from './error-handler.middleware';
 import spotsReducer from './spotSlice';
 
 const store = configureStore({
@@ -8,7 +9,7 @@ const store = configureStore({
         auth: authReducer,
         spots: spotsReducer
     },
-    middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(customMiddleware),
+    middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(localStorageMiddleware, errorHandlerMiddleware),
 });
 
 export default store;

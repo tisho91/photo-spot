@@ -11,14 +11,19 @@ const axiosWithDefaultOptions = (options: any) => {
     return axios.create({ ...defaultOptions, ...options });
 };
 
+const errorCb = (error: any) => {
+    throw error.response?.data
+}
+
 const get = (endpoint: string, options = {}) =>
-    axiosWithDefaultOptions(options).get(endpoint);
+    axiosWithDefaultOptions(options).get(endpoint).catch(errorCb);
 
 const post = (endpoint: string, data: any, options = {}) =>
-    axiosWithDefaultOptions(options).post(endpoint, data)
+    axiosWithDefaultOptions(options)
+        .post(endpoint, data).catch(errorCb)
 
 const patch = (endpoint: string, data: any, options = {}) =>
-    axiosWithDefaultOptions(options).patch(endpoint, data)
+    axiosWithDefaultOptions(options).patch(endpoint, data).catch(errorCb)
 
 
 const httpService = {

@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator'
-import { HttpError } from '../utils/http-error'
 import { createUser, getUserByToken, signIn, updateProfile } from '../services/users.service';
 import { createToken } from '../utils/create-token';
+import { ERROR } from '../common/constants/error-codes';
 
 export async function getCurrentUser(req: any, res: any, next: any) {
     try {
@@ -16,12 +16,12 @@ export async function getCurrentUser(req: any, res: any, next: any) {
 export async function signup(req: any, res: any, next: any) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new HttpError('Invalid email input', 402))
+        return next(new Error(ERROR.INVALID_EMAIL))
     }
     try {
         const user = await createUser(req.body);
         let { token, tokenExpirationDate } = createToken(user.id);
-        res.status(201).json({ token })
+        res.status(201).json({ token, tokenExpirationDate })
     } catch (error) {
         return next(error)
     }
@@ -39,8 +39,6 @@ export async function login(req: any, res: any, next: any) {
 
 }
 
-
-// TODO - change this to edit user and add avatar
 export async function updateUserProfile(req: any, res: any, next: any) {
     try {
         const userId = req.params.userId;
