@@ -1,22 +1,38 @@
-import Header from './components/header/Header';
 import { BrowserRouter } from 'react-router-dom';
 
 import React from 'react';
 
 import AppRoutes from './routes';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+let theme = createTheme({
+    palette: {
+        primary: {
+            main: '#171717',
+        },
+        text: {
+            primary: '#00ff00',
+        },
+    },
+
+    typography: {
+        fontFamily: [
+            'Source Serif Pro'
+        ].join(',')
+    }
+});
 const App: React.FC = () => {
 
     return (
-            <div>
-                <div>
-                    <Header/>
-                        <BrowserRouter>
-                           <AppRoutes/>
-                        </BrowserRouter>
-                </div>
-            </div>
-        );
+        <div>
+                {/*<Header/>*/ }
+                <BrowserRouter>
+                    <ThemeProvider theme={ theme }>
+                        <AppRoutes/>
+                    </ThemeProvider>
+                </BrowserRouter>
+        </div>
+    );
 
 }
 
