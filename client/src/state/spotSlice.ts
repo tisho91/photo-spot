@@ -14,7 +14,7 @@ export const createNewSpotRequest = createAsyncThunk(
             const response: any = await httpService.post('/spots', createFormData(data));
             return response.data;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 );
@@ -26,7 +26,7 @@ export const getAllSpotsRequest = createAsyncThunk(
             const response: any = await httpService.get('/spots');
             return response.data;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 );

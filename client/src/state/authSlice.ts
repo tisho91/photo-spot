@@ -28,7 +28,7 @@ export const sendLoginRequest = createAsyncThunk(
             const response: any = await httpService.post('/users/login', loginData);
             return response.data
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 );
@@ -40,7 +40,7 @@ export const getCurrentUserDataRequest = createAsyncThunk(
             const response: any = await httpService.get('/users/me');
             return response.data
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 )
@@ -53,7 +53,7 @@ export const sendRegisterRequest = createAsyncThunk(
             const response: any = await httpService.post('/users/signup', userData);
             return response.data;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 )
@@ -66,7 +66,7 @@ export const sendUpdateProfileRequest = createAsyncThunk(
             const response: any = await httpService.patch('/users/me', createFormData(data));
             return response.data;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
+            return thunkAPI.rejectWithValue(error);
         }
     }
 );
@@ -82,16 +82,10 @@ export const authSlice = createSlice({
         }
     },
     extraReducers: (builder: any) => {
-        builder.addCase(sendLoginRequest.rejected, (state: any, action: any) => {
-            return state;
-        })
         builder.addCase(sendLoginRequest.fulfilled, (state: any, action: any) => {
             state.token = action.payload.token;
             state.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
-        });
-        builder.addCase(sendLoginRequest.pending, (state: any) => {
-            return state;
         });
         builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
             state.token = action.payload.token;

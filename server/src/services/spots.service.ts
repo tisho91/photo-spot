@@ -1,9 +1,9 @@
 import Spot from '../models/spot.schema'
-import { HttpError } from '../utils/http-error';
 import User from '../models/user.schema';
 import Image from '../models/image.schema';
 import mongoose, { DocumentDefinition } from 'mongoose';
 import { ISpot } from '../models/spot.model';
+import { ERROR } from '../common/constants/error-codes';
 
 
 export async function getAllSpots() {
@@ -16,11 +16,12 @@ export async function getSpotById(id: string) {
     try {
         spot = await Spot.findById(id);
         if (!spot) {
-            throw new HttpError('Spot not fount', 404)
+            throw new Error(ERROR.SPOT_NOT_FOUND)
         }
         return spot.toObject({ getters: true })
     } catch (error) {
-        throw error;
+        throw new Error(ERROR.SPOT_NOT_FOUND)
+
     }
 }
 
@@ -29,11 +30,11 @@ export async function getSpotsByUserId(userId: string) {
     try {
         const user = await User.findById(userId).populate('spots');
         if (!user?.spots || !user.spots.length) {
-            throw new HttpError('Spots not fount', 404)
+            throw new Error(ERROR.SPOT_NOT_FOUND)
         }
         return user.spots.map((spot: any) => spot.toObject({ getters: true }))
     } catch (error) {
-        throw error
+        throw new Error(ERROR.SPOT_NOT_FOUND)
     }
 }
 
@@ -48,7 +49,8 @@ export async function addImages(images: string[], uploader: string) {
         await Image.insertMany(createdImages)
         return createdImages.map((image: any) => image.toObject({ getters: true }))
     } catch (error) {
-        throw error;
+        throw new Error(ERROR.SPOT_NOT_FOUND)
+
     }
 }
 
@@ -67,7 +69,7 @@ export async function createNewSpot(input: DocumentDefinition<ISpot>) {
     try {
         const user = await User.findById(creator);
         if (!user) {
-            throw new HttpError('User not found for this id', 401)
+            throw new Error(ERROR.USER_NOT_FOUND)
         }
         try {
             const session = await mongoose.startSession();
@@ -78,12 +80,16 @@ export async function createNewSpot(input: DocumentDefinition<ISpot>) {
             await session.commitTransaction()
 
         } catch (error) {
-            console.log('other errorr', error)
-            throw error
+            console.log('znachi tuka pyrvo')
+            console.log(error)
+            throw new Error(ERROR.DATABASE_ERROR)
+
         }
         return { ...createdSpot.toObject({ getters: true }), images }
     } catch (error) {
-        throw new HttpError('User not found', 401);
+        console.log('ili tuka idva maj ?>?????')
+        console.log(error)
+        throw new Error(ERROR.USER_NOT_FOUND)
     }
 }
 
@@ -91,7 +97,7 @@ export async function updateSpot(title: string, description: string, spotId: str
     try {
         const spot = await Spot.findById(spotId);
         if (spot?.creator.toString() !== userId) {
-            throw new HttpError('Cannot edit bro', 401)
+            return new Error(ERROR.CANNOT_EDIT_SPOT)
         }
         spot.title = title;
         spot.description = description;
@@ -99,11 +105,12 @@ export async function updateSpot(title: string, description: string, spotId: str
         try {
             await spot.save();
         } catch (error) {
-            throw error
+            return new Error(ERROR.CANNOT_EDIT_SPOT)
+
         }
         return spot.toObject({ getters: true })
     } catch (error) {
-        throw error
+        throw new Error(ERROR.CANNOT_EDIT_SPOT)
     }
 }
 
@@ -112,10 +119,10 @@ export async function deleteSpot(spotId: string, userId: string) {
     try {
         const spot = await Spot.findById(spotId).populate('creator');
         if (!spot) {
-            throw new HttpError('No spot found', 402);
+            return new Error(ERROR.SPOT_NOT_FOUND)
         }
         if (spot.creator.toString() !== userId) {
-            throw new HttpError('Cannot delete bro', 401);
+            return new Error(ERROR.CANNOT_DELETE_SPOT)
         }
         try {
             const session = await mongoose.startSession();
@@ -126,10 +133,10 @@ export async function deleteSpot(spotId: string, userId: string) {
             await session.commitTransaction();
             return true;
         } catch (error) {
-            throw error;
+            return new Error(ERROR.CANNOT_DELETE_SPOT)
         }
     } catch (error) {
-        throw error
+        throw new Error(ERROR.CANNOT_DELETE_SPOT)
     }
 
 }

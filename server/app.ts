@@ -5,7 +5,6 @@ import { json } from 'body-parser'
 import { join, resolve } from 'path'
 import { dbConfig } from './src/config/db.config'
 import { corsMiddleware } from './src/middlewares/cors.middleware'
-import { HttpError } from './src/utils/http-error';
 
 
 const app = express();
@@ -19,13 +18,11 @@ app.use(router);
 app.use((req, res, next) => {
     res.sendFile(resolve(__dirname, '../../client/build', 'index.html'))
 })
-app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     if (res.headersSent) {
         return next(error)
     }
-    console.log(error)
-    res.status(error.code || 500);
-    res.json({ message: error.message || 'An unknown error occurred!' })
+    res.status(500).json({ message: error?.message || error || 'An unknown error occurred!' })
 
 });
 mongoose.connect(dbConfig.url).then(() => {

@@ -1,9 +1,6 @@
 import { verify } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-
-import { HttpError } from '../utils/http-error';
-
-
+import { ERROR } from '../common/constants/error-codes';
 
 export function authGuard(req: Request, res: Response, next: NextFunction) {
     if (req.method === 'OPTIONS') {
@@ -13,14 +10,14 @@ export function authGuard(req: Request, res: Response, next: NextFunction) {
     try {
         token = req.headers.authorization?.split(' ')[1];
         if (!token) {
-            return next(new HttpError('auth failed', 401))
+            return next(new Error(ERROR.AUTHENTICATION_FAILED))
         }
         const privateKey = process.env.JWT_PRIVATE_KEY as string;
         const decodedToken: any = verify(token, privateKey);
         req.params.userId = decodedToken.userId;
         next();
     } catch (error) {
-        return next(error)
+        return next(ERROR.AUTHENTICATION_FAILED)
     }
 
 
