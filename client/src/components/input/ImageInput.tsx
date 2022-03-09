@@ -1,21 +1,20 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 
 const ImageInput = (props: any) => {
     const { register } = props;
     return (
         <>
+            <input accept="image/*"
+                   type="file"
+                   id={ props.id }
+                   { ...register(props.id) }
+                   style={ { display: 'none' } }
+                   multiple={ props.multiple }
+            />
             <label htmlFor={ props.id }>
-                <input accept="image/*"
-                       type="file"
-                       id={ props.id }
-                       { ...register(props.id) }
-                       style={ { display: 'none' } }
-                       multiple={props.multiple}
-                />
-                <Button variant="contained" component="span">
+                <span>
                     Upload
-                </Button>
+                </span>
             </label>
         </>
     );
