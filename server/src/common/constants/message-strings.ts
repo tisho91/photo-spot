@@ -1,3 +1,3 @@
-export const MESSAGE = {
-    SPOT_DELETED: 'SPOT_DELETED'
+export enum MESSAGE {
+    SPOT_DELETED = 'SPOT_DELETED'
 }

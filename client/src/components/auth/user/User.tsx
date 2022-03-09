@@ -1,5 +1,5 @@
-import * as yup from 'yup';
 import React from 'react';
+import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendUpdateProfileRequest, userSelector } from '../../../state/authSlice';
 import { HOME } from '../../../constants/routes';

@@ -1,6 +1,6 @@
-import { BrowserRouter } from 'react-router-dom';
-
 import React from 'react';
+
+import { BrowserRouter } from 'react-router-dom';
 
 import AppRoutes from './routes';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -14,6 +14,7 @@ let theme = createTheme({
             primary: '#00ff00',
         },
     },
+
 
     typography: {
         fontFamily: [
