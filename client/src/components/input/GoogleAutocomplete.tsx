@@ -1,14 +1,13 @@
 import React from 'react';
-import { FormControl, TextField } from '@material-ui/core';
 import { usePlacesWidget } from 'react-google-autocomplete';
 
 
 const GoogleAutocomplete = (props: any) => {
     const { setValue } = props;
-    const { ref } = usePlacesWidget({
+    const { ref } = usePlacesWidget<HTMLInputElement>({
         apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
         options: {
-            types: ["geocode", "establishment"],
+            types: [ 'geocode', 'establishment' ],
         },
         onPlaceSelected: (place) => {
             console.log(place)
@@ -21,12 +20,14 @@ const GoogleAutocomplete = (props: any) => {
         },
     });
     return (
-        <FormControl>
-            <TextField
-                inputRef={ ref }
-                inputProps={ { autoComplete: 'off' } }
+        <>
+            <input
+                ref={ ref }
+                autoComplete="off"
             />
-        </FormControl>
+        </>
+
+
     );
 };
 

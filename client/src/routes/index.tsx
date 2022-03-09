@@ -11,7 +11,7 @@ import SpotList from '../components/spots/SpotList';
 import Spot from '../components/spots/Spot';
 import { getAllSpotsRequest } from '../state/spotSlice';
 import SpotCreator from '../components/spots/SpotCreator';
-import SignInSide from '../sample';
+
 
 const AppRoutes = () => {
     const { token } = useSelector(authSelector);
@@ -35,7 +35,6 @@ const AppRoutes = () => {
             <PrivateRoute path={ SPOT_LIST } component={ SpotList } exact/>
             <PrivateRoute path={ SPOT_LIST_ITEM } component={ Spot } exact/>
             <PrivateRoute path={ EDIT_USER } component={ User } exact/>
-            <Route path="/test" component={ SignInSide } exact/>
             <Route path={ AUTH } component={ Auth }/>
             {
                 !!token ? <Redirect to={ HOME }/> : null

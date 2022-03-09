@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoadingButton } from '@mui/lab';
 
 
 const Form = (props: any) => {
@@ -36,9 +35,9 @@ const Form = (props: any) => {
     return (
         <form onSubmit={ onSubmit }>
             { renderChildren() }
-            <LoadingButton fullWidth loading={ false } type="submit" variant="outlined">
+            <button type="submit">
                 { submitButtonText || 'text' }
-            </LoadingButton>
+            </button>
         </form>
     );
 };

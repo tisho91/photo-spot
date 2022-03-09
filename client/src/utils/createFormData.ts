@@ -1,5 +1,6 @@
 const createFormData = (data: any): FormData => {
     const formData = new FormData();
+    // TODO - fix this for update profile
     for (const key in data) {
         if (data[key] instanceof FileList) {
             for (const i in data[key]) {
