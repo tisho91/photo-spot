@@ -28,13 +28,14 @@ const SpotCreator = () => {
 
 
     const onSubmit = handleSubmit(spot => {
-        const images = spot.images
-        for (let i = 0; i < images.length; i++) {
+        const images = spot.images;
+        images.map((image: any) => {
             const fileReader = new FileReader();
             fileReader.onload = () => {
             }
-            fileReader.readAsDataURL(images[i]);
-        }
+            fileReader.readAsDataURL(image);
+
+        })
         dispatch(createNewSpotRequest({ ...spot, images }));
     });
 
