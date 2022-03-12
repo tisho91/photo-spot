@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const SpotListItem = (props: any) => {
     const imgUrl = props.images[0]?.url || 'https://webcolours.ca/wp-content/uploads/2020/10/webcolours-unknown.png'
     return (
-        <Link to={ `/spots/${ props.id }` } style={ {
+        <li><Link to={ `/spots/${ props.id }` } style={ {
             width: '120px',
             margin: '0 10px'
         } }>
@@ -13,6 +13,7 @@ const SpotListItem = (props: any) => {
                 width: '100px', height: '100px'
             } } src={ imgUrl }/>
         </Link>
+        </li>
     )
 }
 

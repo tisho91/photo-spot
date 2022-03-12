@@ -8,12 +8,12 @@ import { ADD_SPOT } from '../../common/constants/routes';
 const SpotList = () => {
     const { spots } = useSelector(spotsSelector);
     return (
-        <div style={ { display: 'flex', flexWrap: 'wrap' } }>
+        <ul style={ { display: 'flex', flexWrap: 'wrap' } }>
             { !!spots ? spots.map((spot: any) => {
                 return <SpotListItem key={ spot.id } { ...spot }/>
             }) : null }
             <Link to={ ADD_SPOT }>Add new</Link>
-        </div>
+        </ul>
     )
 }
 
