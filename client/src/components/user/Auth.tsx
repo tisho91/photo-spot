@@ -1,12 +1,30 @@
 import React from 'react';
 import AuthRouter from './AuthRouter';
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  background-color: #171717;
+`
+
+const AuthWrapper = styled(AuthRouter)`
+  margin: 20px auto;
+  width: 40%;
+`
+const imgUrl = '../../assets/images/splash-image-auth.png'
+const SideImage = styled.div`
+  background-image: url(${ imgUrl });
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+`
 const Auth = () => {
-    const backgroundImageUrl = '../assets/images/splash-image-user.png'
     return (
-        <>
-            <AuthRouter/>
-        </>
+        <Wrapper>
+            <AuthWrapper/>
+            <SideImage/>
+        </Wrapper>
     );
 };
 
