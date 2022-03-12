@@ -1,28 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import httpService from '../services/http.service';
-import createFormData from '../utils/createFormData';
-
-let tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
-let token = localStorage.getItem('token');
-
-if (tokenExpirationDate) {
-    const tokenExpiration = new Date(tokenExpirationDate);
-    if (tokenExpiration < new Date()) {
-        token = null;
-        tokenExpirationDate = null;
-    }
-}
+import { httpService } from '../common/services';
+import { createFormData, getTokenData } from '../common/utils';
 
 
 const initialState = {
-    token,
-    tokenExpirationDate,
-    user: {}
+    auth: { ...getTokenData() },
+    data: {}
 };
 
 
 export const sendLoginRequest = createAsyncThunk(
-    'auth/login',
+    'user/login',
     async (loginData: any, thunkAPI) => {
         try {
             const response: any = await httpService.post('/users/login', loginData);
@@ -34,7 +22,7 @@ export const sendLoginRequest = createAsyncThunk(
 );
 
 export const getCurrentUserDataRequest = createAsyncThunk(
-    'auth/getUserData',
+    'user/getUserData',
     async (data: void, thunkAPI) => {
         try {
             const response: any = await httpService.get('/users/me');
@@ -47,7 +35,7 @@ export const getCurrentUserDataRequest = createAsyncThunk(
 
 
 export const sendRegisterRequest = createAsyncThunk(
-    'auth/register',
+    'user/register',
     async (userData: any, thunkAPI) => {
         try {
             const response: any = await httpService.post('/users/signup', userData);
@@ -72,28 +60,29 @@ export const sendUpdateProfileRequest = createAsyncThunk(
 );
 
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         logout: (state) => {
-            state.token = null
-            state.user = {};
+            state.auth.token = null
+            state.auth.tokenExpirationDate = null
+            state.data = {};
         }
     },
     extraReducers: (builder: any) => {
         builder.addCase(sendLoginRequest.fulfilled, (state: any, action: any) => {
-            state.token = action.payload.token;
-            state.tokenExpirationDate = action.payload.tokenExpirationDate;
+            state.auth.token = action.payload.token;
+            state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
         });
         builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
-            state.token = action.payload.token;
-            state.tokenExpirationDate = action.payload.tokenExpirationDate;
+            state.auth.token = action.payload.token;
+            state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
         });
         builder.addCase(getCurrentUserDataRequest.fulfilled, (state: any, action: any) => {
-            state.user = action.payload.user;
+            state.data = action.payload.user;
             return state;
         });
         builder.addCase(sendUpdateProfileRequest.fulfilled, (state: any, action: any) => {
@@ -103,8 +92,8 @@ export const authSlice = createSlice({
     }
 });
 
-export const authSelector = (state: any) => state.auth;
-export const userSelector = (state: any) => state.auth.user;
-const { actions } = authSlice
+export const authSelector = (state: any) => state.user.auth;
+export const userSelector = (state: any) => state.user.data;
+const { actions } = userSlice
 export const { logout } = actions;
-export default authSlice.reducer;
+export default userSlice.reducer;

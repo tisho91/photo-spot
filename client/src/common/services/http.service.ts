@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { getTokenData } from '../utils';
 
 const axiosWithDefaultOptions = (options: any) => {
-    const token = localStorage.getItem('token') || ''
+    const { token } = getTokenData()
     const defaultOptions = {
         baseURL: process.env.REACT_APP_BACKEND_URL,
         headers: {
@@ -26,10 +27,10 @@ const patch = (endpoint: string, data: any, options = {}) =>
     axiosWithDefaultOptions(options).patch(endpoint, data).catch(errorCb)
 
 
-const httpService = {
+export const httpService = {
     get,
     post,
     patch,
 };
 
-export default httpService;
+

@@ -3,14 +3,15 @@ import Form from '../form/Form';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';
-import TextInput from '../input/TextInput';
-import GoogleAutocomplete from '../input/GoogleAutocomplete';
-import ImageInput from '../input/ImageInput';
+import TextInput from '../form/input/TextInput';
+import GoogleAutocomplete from '../form/input/GoogleAutocomplete';
+import ImageInput from '../form/input/ImageInput';
+import { FormDefinition, SpotData } from '../../common/interfaces';
+import { createFileReader } from '../../common/utils';
 
 const SpotCreator = () => {
     const dispatch = useDispatch()
-    const formDefinition = {
-        title: 'Create Spot',
+    const formDefinition: FormDefinition = {
         validationSchema: yup.object({
             title: yup.string().required(),
             description: yup.string(),
@@ -19,17 +20,14 @@ const SpotCreator = () => {
                 return files.length;
             })
         }),
-        submitClickCallback: (spot: any) => {
+        submitClickCallback: async (spot: SpotData) => {
             const images = spot.images
-            for (let i = 0; i < images.length; i++) {
-                const fileReader = new FileReader();
-                fileReader.onload = () => {
-                }
-                fileReader.readAsDataURL(images[i]);
+            for (const image of images) {
+                createFileReader(image)
             }
             dispatch(createNewSpotRequest({ ...spot, images }));
         },
-        submitButtonText: 'Submit'
+        submitButtonText: 'Submit',
     }
 
     return (

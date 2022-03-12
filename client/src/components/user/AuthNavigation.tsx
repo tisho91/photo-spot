@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { LOGIN, REGISTER } from '../../constants/routes';
+import { LOGIN, REGISTER } from '../../common/constants/routes';
 const AuthNavigation = () => {
     return (
         <div >

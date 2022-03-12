@@ -9,6 +9,11 @@ const TextInput = (props: any) => {
                 { ...register(props.id) }
                 { ...rest }
             />
+            {
+                errors ? (
+                    <span>{ errors.message }</span>
+                ) : null
+            }
         </>
     );
 };

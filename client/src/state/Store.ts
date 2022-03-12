@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './authSlice';
+import userSlice from './userSlice';
 import { localStorageMiddleware, } from './local-storage.middleware';
 import { errorHandlerMiddleware } from './error-handler.middleware';
 import spotsReducer from './spotSlice';
 
 const store = configureStore({
     reducer: {
-        auth: authReducer,
+        user: userSlice,
         spots: spotsReducer
     },
     middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(localStorageMiddleware, errorHandlerMiddleware),
