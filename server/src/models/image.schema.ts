@@ -1,6 +1,6 @@
 import { model, Model, Schema, Types } from 'mongoose';
 import User from './user.schema';
-import { IImage } from './image.model';
+import { Image as IImage } from './image.model';
 
 
 const imageSchema: Schema = new Schema({
