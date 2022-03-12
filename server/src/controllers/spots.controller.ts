@@ -10,6 +10,8 @@ import {
 } from '../services/spots.service';
 import { ERROR } from '../common/constants/error-codes';
 import { MESSAGE } from '../common/constants/message-strings';
+import { HttpError } from '../utils/http-error';
+import { Sw3Image } from '../models/image.model';
 
 
 export async function getAllSpotsHandler(req: Request, res: Response, next: NextFunction) {
@@ -22,7 +24,8 @@ export async function getSpotByIdHandler(req: Request, res: Response, next: Next
         const spot = await getSpotById(req.params.spotId);
         res.json({ spot })
     } catch (error) {
-        return next(new Error(ERROR.UNKNOWN_ERROR))
+
+        return next(new HttpError(ERROR.UNKNOWN_ERROR))
     }
 }
 
@@ -31,17 +34,17 @@ export async function getSpotsByUserIdHandler(req: Request, res: Response, next:
         const spots = await getSpotsByUserId(req.params.userId);
         res.json({ spots })
     } catch (error) {
-        return next(new Error(ERROR.UNKNOWN_ERROR))
+        return next(new HttpError(ERROR.UNKNOWN_ERROR))
     }
 }
 
-export async function createNewSpotHandler(req: any, res: any, next: any) {
+export async function createNewSpotHandler(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new Error(ERROR.INVALID_INPUT))
+        return next(new HttpError(ERROR.INVALID_INPUT))
     }
-    const images = req.files.map((image: any) => image.location);
-    console.log(req.body.coordinates)
+    // @ts-ignore
+    const images = req.files.map((image: Sw3Image) => image.location);
     const input = { ...req.body, creator: req.params.userId, images };
     try {
         const spot = await createNewSpot(input)
@@ -55,7 +58,7 @@ export async function createNewSpotHandler(req: any, res: any, next: any) {
 export async function updateSpotHandler(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new Error(ERROR.INVALID_INPUT))
+        return next(new HttpError(ERROR.INVALID_INPUT))
     }
     const { title, description } = req.body;
     const spotId = req.params.spotId;
