@@ -1966,6 +1966,7 @@ __metadata:
     "@types/react-dom": ^17.0.9
     "@types/react-router": ^5.1.18
     "@types/react-router-dom": ^5.3.0
+    "@types/yup": ^0.29.13
     axios: ^0.26.0
     google-map-react: ^2.1.10
     history: ^5.0.1
@@ -2987,6 +2988,13 @@ __metadata:
   dependencies:
     "@types/yargs-parser": "*"
   checksum: 8e358aeb8f0c3758e59e2b8fcfdee5627ab2fe3d92f50f380503d966c7f33287be3322155516a50d27727fde1ad3878f48f60cd6648439126d4b0bbb1a1153ed
+  languageName: node
+  linkType: hard
+
+"@types/yup@npm:^0.29.13":
+  version: 0.29.13
+  resolution: "@types/yup@npm:0.29.13"
+  checksum: 042eb51becd38559d0d7c86a40e0118d84d2b071c926999ec7721cbef759673be290d69b35ca7985db1bbb6d97544a2db20bb7cacbdaf827391bdd199e3789f9
   languageName: node
   linkType: hard
 

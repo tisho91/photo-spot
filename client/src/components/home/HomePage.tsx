@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { EDIT_USER } from '../../constants/routes';
-import { userSelector } from '../../state/authSlice';
+import { EDIT_USER } from '../../common/constants/routes';
+import { userSelector } from '../../state/userSlice';
 import SpotList from '../spots/SpotList';
 import Header from '../header/Header';
 

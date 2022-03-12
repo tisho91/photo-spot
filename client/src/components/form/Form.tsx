@@ -1,9 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FormDefinition } from '../../common/interfaces';
 
 
-const Form = (props: any) => {
+const Form = (props: FormDefinition) => {
     const { submitClickCallback, validationSchema, submitButtonText, children, defaultValues } = props;
     const { handleSubmit, register, formState: { errors }, setValue } = useForm<any>({
         defaultValues,

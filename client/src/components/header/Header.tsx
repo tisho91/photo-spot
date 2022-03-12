@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, userSelector } from '../../state/authSlice';
-import FormButton from '../formButton/FormButton';
+import { logout, userSelector } from '../../state/userSlice';
+import FormButton from '../form/FormButton';
 
 
 const Header = () => {

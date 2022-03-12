@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { spotsSelector } from '../../state/spotSlice';
 import SpotListItem from './SpotListItem';
-import { ADD_SPOT } from '../../constants/routes';
+import { ADD_SPOT } from '../../common/constants/routes';
 
 const SpotList = () => {
     const { spots } = useSelector(spotsSelector);

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import httpService from '../services/http.service';
-import createFormData from '../utils/createFormData';
+import { httpService } from '../common/services';
+import { createFormData } from '../common/utils';
 
 
 const initialState = {

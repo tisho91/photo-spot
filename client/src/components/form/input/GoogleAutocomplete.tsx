@@ -10,7 +10,6 @@ const GoogleAutocomplete = (props: any) => {
             types: [ 'geocode', 'establishment' ],
         },
         onPlaceSelected: (place) => {
-            console.log(place)
             const coordinates = {
                 lat: place.geometry?.location?.lat(),
                 lng: place.geometry?.location?.lng()
