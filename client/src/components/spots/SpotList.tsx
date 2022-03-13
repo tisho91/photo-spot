@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { spotsSelector } from '../../state/spotSlice';
 import SpotListItem from './SpotListItem';
-import { ADD_SPOT } from '../../common/constants/routes';
+import { AppPaths } from '../../common/constants/routes';
 
 const SpotList = () => {
     const { spots } = useSelector(spotsSelector);
@@ -12,7 +12,7 @@ const SpotList = () => {
             { !!spots ? spots.map((spot: any) => {
                 return <SpotListItem key={ spot.id } { ...spot }/>
             }) : null }
-            <Link to={ ADD_SPOT }>Add new</Link>
+            <Link to={ AppPaths.AddSpot }>Add new</Link>
         </ul>
     )
 }

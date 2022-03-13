@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { EDIT_USER } from '../../common/constants/routes';
+import { AppPaths } from '../../common/constants/routes';
 import { userSelector } from '../../state/userSlice';
 import SpotList from '../spots/SpotList';
 import Header from '../header/Header';
@@ -14,7 +14,7 @@ const HomePage = () => {
         <div>
             <Header/>
             <img style={ { width: '200px', height: '200px' } } src={ avatar }/>
-            <Link to={ EDIT_USER }>Edit Profile</Link>
+            <Link to={ AppPaths.EditUser }>Edit Profile</Link>
             <SpotList/>
 
         </div>

@@ -6,7 +6,7 @@ export interface FormDefinition {
     submitButtonText: string;
     defaultValues?: null|UserProfile;
     children?: ReactElement<any>[];
-
+    className?: string
 }
 
 
@@ -40,4 +40,8 @@ export interface SubmitData extends SpotData, UserCredentials, UserProfileWithAv
 export interface TokenData {
     token: string|null;
     tokenExpirationDate: string|null
+}
+
+export interface StyledChildComponent {
+    className?: string;
 }

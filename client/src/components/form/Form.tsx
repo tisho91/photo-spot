@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormDefinition } from '../../common/interfaces';
+import { SubmitButton } from './input/StyledButtons';
 
 
 const Form = (props: FormDefinition) => {
@@ -34,11 +35,11 @@ const Form = (props: FormDefinition) => {
         )
     }
     return (
-        <form onSubmit={ onSubmit }>
+        <form className={ props.className } onSubmit={ onSubmit }>
             { renderChildren() }
-            <button type="submit">
+            <SubmitButton type="submit">
                 { submitButtonText || 'text' }
-            </button>
+            </SubmitButton>
         </form>
     );
 };
