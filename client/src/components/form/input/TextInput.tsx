@@ -1,20 +1,53 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+`
+
+const StyledInput = styled.input`
+  height: 40px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  padding-left: 8px;
+  font-size: 16px;
+
+  :focus, :hover {
+    background-color: #ffffff;
+  }
+`
+
+const StyledLabel = styled.label`
+  font-size: 18px;
+  color: #fff;
+  text-transform: capitalize;
+`
+
+const ErrorMessage = styled.span`
+  color: #D1193E;
+`
+
 
 const TextInput = (props: any) => {
-    const { register, setValue, errors, ...rest } = props;
+    const { register, setValue, errors } = props;
     return (
-        <>
-            <input
+        <Wrapper className={ props.className }>
+            <StyledLabel htmlFor={ props.id }>{ props.name }</StyledLabel>
+            <StyledInput
                 autoComplete="off"
                 { ...register(props.id) }
-                { ...rest }
+                id={ props.id }
+                type={ props.type }
             />
             {
                 errors ? (
-                    <span>{ errors.message }</span>
+                    <ErrorMessage>{ errors.message }</ErrorMessage>
                 ) : null
             }
-        </>
+        </Wrapper>
     );
 };
 

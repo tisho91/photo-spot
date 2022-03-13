@@ -5,7 +5,7 @@ import { Redirect, Route } from 'react-router-dom';
 import Auth from '../../components/user/Auth';
 import HomePage from '../../components/home/HomePage';
 import { PrivateRoute } from '../PrivateRoute';
-import { ADD_SPOT, AUTH, EDIT_USER, HOME, SPOT_LIST, SPOT_LIST_ITEM } from '../constants/routes';
+import { AppPaths } from '../constants/routes';
 import Profile from '../../components/user/Profile';
 import SpotList from '../../components/spots/SpotList';
 import Spot from '../../components/spots/Spot';
@@ -30,14 +30,14 @@ const AppRoutes = () => {
 
     return (
         <>
-            <PrivateRoute path={ HOME } component={ HomePage } exact/>
-            <PrivateRoute path={ ADD_SPOT } component={ SpotCreator } exact/>
-            <PrivateRoute path={ SPOT_LIST } component={ SpotList } exact/>
-            <PrivateRoute path={ SPOT_LIST_ITEM } component={ Spot } exact/>
-            <PrivateRoute path={ EDIT_USER } component={ Profile } exact/>
-            <Route path={ AUTH } component={ Auth }/>
+            <PrivateRoute path={ AppPaths.Home } component={ HomePage } exact/>
+            <PrivateRoute path={ AppPaths.AddSpot } component={ SpotCreator } exact/>
+            <PrivateRoute path={ AppPaths.SpotList } component={ SpotList } exact/>
+            <PrivateRoute path={ AppPaths.SpotListItem } component={ Spot } exact/>
+            <PrivateRoute path={ AppPaths.EditUser } component={ Profile } exact/>
+            <Route path={ AppPaths.Auth } component={ Auth }/>
             {
-                !!token ? <Redirect to={ HOME }/> : null
+                !!token ? <Redirect to={ AppPaths.Home }/> : null
             }
         </>
     );

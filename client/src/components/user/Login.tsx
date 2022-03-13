@@ -5,11 +5,13 @@ import * as yup from 'yup';
 
 import { FormDefinition, UserCredentials } from '../../common/interfaces';
 import { sendLoginRequest } from '../../state/userSlice';
-
-import Form from '../form/Form';
-import TextInput from '../form/input/TextInput';
-
 import { email, password } from '../../common/utils';
+
+import { AuthForm } from './AuthForm';
+import { FormInput } from '../form/input/StyledInputs';
+import AuthNavigation from './AuthNavigation';
+import { AppPaths } from '../../common/constants/routes';
+
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -27,10 +29,14 @@ const Login = () => {
         submitButtonText: 'Login'
     }
     return (
-        <Form { ...formDefinition }>
-            <TextInput type="email" id="email" name="email"/>
-            <TextInput type="password" id="password" name="password"/>
-        </Form>
+        <>
+            <AuthForm { ...formDefinition }>
+                <FormInput type="email" id="email" name="email"/>
+                <FormInput type="password" id="password" name="password"/>
+            </AuthForm>
+            <AuthNavigation route={ AppPaths.Register } linkText={ 'Register' }
+                            helperText={ 'Don’t have an account?' }/>
+        </>
     );
 };
 

@@ -1,10 +1,12 @@
-export const HOME = '/';
-export const SPOT_LIST = '/spots';
-export const SPOT_LIST_ITEM = '/spots/:id';
-export const ADD_SPOT = '/spots/create';
-export const UPDATE_DISPLAY_NAME = '/update-display-name';
-export const UPDATE_AVATAR = '/update-avatar';
-export const EDIT_USER = '/edit-user'
-export const AUTH = '/user/*';
-export const LOGIN = '/user/login';
-export const REGISTER = '/user/register';
+export enum AppPaths {
+    Home = '/',
+    SpotList = '/spots',
+    SpotListItem = '/spots/:id',
+    AddSpot = '/spots/create',
+    UpdateDisplayName = '/update-display-name',
+    UpdateAvatar = '/update-avatar',
+    EditUser = '/edit-user',
+    Auth = '/user/*',
+    Login = '/user/login',
+    Register = '/user/register',
+}

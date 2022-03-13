@@ -9,8 +9,9 @@ const Wrapper = styled.div`
 `
 
 const AuthWrapper = styled(AuthRouter)`
-  margin: 20px auto;
-  width: 40%;
+  margin: 0 auto;
+  width: 50%;
+  padding: 20px;
 `
 const imgUrl = '../../assets/images/splash-image-auth.png'
 const SideImage = styled.div`

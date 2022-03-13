@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import * as yup from 'yup';
 
-import { HOME } from '../../common/constants/routes';
+import { AppPaths } from '../../common/constants/routes';
 import { FormDefinition, UserProfileWithAvatar } from '../../common/interfaces';
 import { sendUpdateProfileRequest, userSelector } from '../../state/userSlice';
 
@@ -42,7 +42,7 @@ const Profile = () => {
                 <TextInput id="name" name="name"/>
                 <ImageInput id="avatar" name="avatar"/>
             </Form>
-            <Link to={ HOME }>go back</Link>
+            <Link to={ AppPaths.Home }>go back</Link>
         </>
     )
 }
