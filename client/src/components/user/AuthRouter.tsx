@@ -3,22 +3,29 @@ import { Route, Switch } from 'react-router';
 import Login from './Login';
 import Register from './Register';
 import { AppPaths } from '../../common/constants/routes';
-import AuthNavigation from './AuthNavigation';
 import Logo from '../Logo';
 import styled from 'styled-components';
+import { StyledChildComponent } from '../../common/interfaces';
+
+const Wrapper = styled.div`
+  width: 50%;
+  margin: 50px auto 0;
+`
 
 const StyledLogo = styled(Logo)`
   margin-bottom: 20px;
 `
 
-const AuthRouter: React.FC = (props: any) => {
+const AuthRouter: (props: StyledChildComponent) => JSX.Element = (props: StyledChildComponent) => {
     return (
         <div className={ props.className }>
-            <StyledLogo/>
-            <Switch>
-                <Route path={ AppPaths.Login } component={ Login }/>
-                <Route path={ AppPaths.Register } component={ Register }/>
-            </Switch>
+            <Wrapper>
+                <StyledLogo/>
+                <Switch>
+                    <Route path={ AppPaths.Login } component={ Login }/>
+                    <Route path={ AppPaths.Register } component={ Register }/>
+                </Switch>
+            </Wrapper>
         </div>
     );
 };

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const AuthWrapper = styled(AuthRouter)`
   margin: 0 auto;
-  width: 50%;
+  width: 100%;
   padding: 20px;
 `
 const imgUrl = '../../assets/images/splash-image-auth.png'
