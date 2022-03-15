@@ -6,11 +6,13 @@ import { AppPaths } from '../../common/constants/routes';
 import Logo from '../Logo';
 import styled from 'styled-components';
 import { StyledChildComponent } from '../../common/interfaces';
-import Header from '../header/Header';
 
 const Wrapper = styled.div`
-  width: 50%;
+  width: 75%;
   margin: 50px auto 0;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `
 
 const StyledLogo = styled(Logo)`

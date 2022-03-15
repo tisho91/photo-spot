@@ -5,7 +5,19 @@ export const BaseButton = styled.button`
   background: #F86E51;
   border-radius: 8px;
   border: none;
-    color: #ffffff;
+  color: #ffffff;
+
+  :hover {
+    cursor: pointer;
+  }
+`
+
+export const SignOutButton = styled(BaseButton)`
+  height: 36px;
+  width: 100px;
+  margin-right: 10px;
+  align-self: center;
+  font-size: 16px;
 `
 
 export const SubmitButton = styled(BaseButton)`

@@ -5,7 +5,7 @@ import { json } from 'body-parser'
 import { join, resolve } from 'path'
 import { dbConfig } from './src/config/db.config'
 import { corsMiddleware } from './src/middlewares/cors.middleware'
-import { HttpError } from 'http-errors';
+import { HttpError } from './src/utils/http-error';
 
 
 const app = express();
@@ -23,7 +23,7 @@ app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
     if (res.headersSent) {
         return next(error)
     }
-    res.status(error.status);
+    res.status(error.code);
     res.json({ message: error?.message || error || 'An unknown error occurred!' })
 
 });

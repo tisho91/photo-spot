@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, userSelector } from '../../state/userSlice';
 import styled from 'styled-components';
-import { BaseButton } from '../form/input/StyledButtons';
-import { openSideMenu } from '../../state/appSlice';
 import { StyledChildComponent } from '../../common/interfaces';
 import SideMenu from '../home/SideMenu';
+import { SignOutButton } from '../form/input/StyledButtons';
+import { AppPaths } from '../../common/constants/routes';
+import { Link } from 'react-router-dom';
 
 
 const HeaderWrapper = styled.header`
@@ -23,29 +24,29 @@ const MessageWrapper = styled.span`
   width: 100%;
 `
 
+const StyledLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: none;
 
-const SignOutButton = styled(BaseButton)`
-  height: 36px;
-  width: 100px;
-  margin-right: 10px;
-  align-self: center;
-  font-size: 16px;
+  :hover {
+    text-decoration: underline;
+  }
 `
 
 const Header = (props: StyledChildComponent) => {
-    const { id, name, avatar } = useSelector(userSelector);
+    const { name } = useSelector(userSelector);
     const dispatch = useDispatch();
-
-    const triggerOpenSideMenu = () => {
-        dispatch(openSideMenu())
-    }
     return (
         <HeaderWrapper className={ props.className }>
-            <MessageWrapper>{ name ? `Hello, ${ name }` : 'Welcome' }
+            <MessageWrapper>
+                Hello,&nbsp;
+                <StyledLink to={ AppPaths.EditUser }>
+                    { name }
+                </StyledLink>
             </MessageWrapper>
-            <div>
-                <span onClick={ triggerOpenSideMenu }>burger</span>
-            </div>
+            <SignOutButton onClick={ () => {
+                dispatch(logout())
+            } }>Sign Out</SignOutButton>
             <SideMenu/>
         </HeaderWrapper>
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthRouter from './AuthRouter';
 import styled from 'styled-components';
-import Header from '../header/Header';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,6 +19,9 @@ const SideImage = styled.div`
   width: 100%;
   background-size: contain;
   background-repeat: no-repeat;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `
 
 

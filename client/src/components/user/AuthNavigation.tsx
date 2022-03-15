@@ -12,13 +12,13 @@ const StyledLink = styled(Link)`
   color: #F86E51;
 `
 
-interface AuthNavigation extends StyledChildComponent {
+interface IAuthNavigation extends StyledChildComponent {
     route: AppPaths
     linkText: string;
     helperText: string;
 }
 
-const AuthNavigation = (props: AuthNavigation) => {
+const AuthNavigation = (props: IAuthNavigation) => {
     return (
         <StyledText>{ props.helperText } <StyledLink to={ props.route }>{ props.linkText }</StyledLink></StyledText>
     );
