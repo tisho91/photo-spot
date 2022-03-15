@@ -11,7 +11,8 @@ import SpotList from '../../components/spots/SpotList';
 import Spot from '../../components/spots/Spot';
 import { getAllSpotsRequest } from '../../state/spotSlice';
 import SpotCreator from '../../components/spots/SpotCreator';
-
+import Header from '../../components/header/Header';
+import styled from 'styled-components';
 
 const AppRoutes = () => {
     const { token } = useSelector(authSelector);
@@ -30,6 +31,7 @@ const AppRoutes = () => {
 
     return (
         <>
+            { !token ? null : <Header/> }
             <PrivateRoute path={ AppPaths.Home } component={ HomePage } exact/>
             <PrivateRoute path={ AppPaths.AddSpot } component={ SpotCreator } exact/>
             <PrivateRoute path={ AppPaths.SpotList } component={ SpotList } exact/>

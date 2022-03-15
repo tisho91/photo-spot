@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthRouter from './AuthRouter';
 import styled from 'styled-components';
+import Header from '../header/Header';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,12 +21,17 @@ const SideImage = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
 `
+
+
 const Auth = () => {
     return (
-        <Wrapper>
-            <AuthWrapper/>
-            <SideImage/>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <AuthWrapper/>
+                <SideImage/>
+            </Wrapper>
+        </>
+
     );
 };
 

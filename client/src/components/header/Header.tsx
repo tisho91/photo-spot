@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout, userSelector } from '../../state/userSlice';
 import styled from 'styled-components';
 import { BaseButton } from '../form/input/StyledButtons';
-import { toggleSideMenu } from '../../state/appSlice';
+import { openSideMenu } from '../../state/appSlice';
+import { StyledChildComponent } from '../../common/interfaces';
+import SideMenu from '../home/SideMenu';
 
 
 const HeaderWrapper = styled.header`
@@ -12,7 +14,7 @@ const HeaderWrapper = styled.header`
   color: #fff;
   display: flex;
   width: 100%;
-  align-items: baseline;
+  align-items: center;
 
 `
 const MessageWrapper = styled.span`
@@ -30,22 +32,21 @@ const SignOutButton = styled(BaseButton)`
   font-size: 16px;
 `
 
-const Header = () => {
+const Header = (props: StyledChildComponent) => {
     const { id, name, avatar } = useSelector(userSelector);
     const dispatch = useDispatch();
-    const logoutUser = () => {
-        dispatch(logout())
-    }
-    const openSideMenu = () => {
-        dispatch(toggleSideMenu())
+
+    const triggerOpenSideMenu = () => {
+        dispatch(openSideMenu())
     }
     return (
-        <HeaderWrapper>
+        <HeaderWrapper className={ props.className }>
             <MessageWrapper>{ name ? `Hello, ${ name }` : 'Welcome' }
             </MessageWrapper>
             <div>
-                <span onClick={ openSideMenu }>burger</span>
+                <span onClick={ triggerOpenSideMenu }>burger</span>
             </div>
+            <SideMenu/>
         </HeaderWrapper>
     );
 };
