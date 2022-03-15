@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { AppPaths } from '../../common/constants/routes';
-import { FormDefinition, UserProfileWithAvatar } from '../../common/interfaces';
+import { FormDefinition, UserProfileFormData } from '../../common/interfaces';
 import { sendUpdateProfileRequest, userSelector } from '../../state/userSlice';
 
 import Form from '../form/Form';
@@ -27,7 +27,7 @@ const Profile = () => {
         defaultValues: {
             name
         },
-        submitClickCallback: async (user: UserProfileWithAvatar) => {
+        submitClickCallback: async (user: UserProfileFormData) => {
             const avatar = user.avatar[0];
             createFileReader(avatar)
             dispatch(sendUpdateProfileRequest({ name: user.name, avatar }));

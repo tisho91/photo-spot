@@ -17,7 +17,7 @@ export interface SpotData {
     images: Blob[]
 }
 
-export interface UserCredentials {
+export interface LoginCredentials {
     email: string;
     password: string;
 }
@@ -26,15 +26,19 @@ export interface UserProfile {
     name: string;
 }
 
-export interface UserProfileWithAvatar extends UserProfile {
+export interface UserProfileRequestData extends UserProfile {
+    avatar: Blob;
+}
+
+export interface UserProfileFormData extends UserProfile {
     avatar: Blob[];
 }
 
-export interface RegisterCredentials extends UserCredentials {
+export interface RegisterCredentials extends LoginCredentials {
     name: string
 }
 
-export interface SubmitData extends SpotData, UserCredentials, UserProfileWithAvatar, RegisterCredentials {
+export interface SubmitData extends SpotData, LoginCredentials, UserProfileFormData, RegisterCredentials {
 }
 
 export interface TokenData {

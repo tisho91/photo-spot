@@ -6,12 +6,12 @@ export const localStorageMiddleware: Middleware = (store: MiddlewareAPI) => (nex
         localStorage.setItem('tokenExpirationDate', action.payload.tokenExpirationDate);
     }
 
-    if (action.type === LOGOUT_OUT_ACTION) {
+    if (action.type === LOGOUT_ACTION) {
         localStorage.clear();
     }
     return next(action)
 }
 
-export const LOGOUT_OUT_ACTION = 'user/logout'
+export const LOGOUT_ACTION = 'user/logout'
 export const LOGIN_FULFILLED_ACTION = 'user/login/fulfilled'
 export const REGISTER_FULFILLED_ACTION = 'user/register/fulfilled'

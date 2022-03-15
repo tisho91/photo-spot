@@ -41,7 +41,7 @@ export const createFileReader = (fileToRead: Blob): void => {
     fileReader.readAsDataURL(fileToRead)
 }
 
-// TODO add Event Name interface
+// TODO add Event Name interface or Enum
 export const attachEvent = (eventName: string, cb: EventListenerOrEventListenerObject) => document.addEventListener(eventName, cb)
 
 export * from './validationSchemas'

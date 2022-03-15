@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as yup from 'yup';
 
-import { FormDefinition, SpotData } from '../../common/interfaces';
+import { FormDefinition, RegisterCredentials, SpotData } from '../../common/interfaces';
 import { sendRegisterRequest } from '../../state/userSlice';
 
 
@@ -23,7 +23,7 @@ const Register = () => {
     }).required();
     const formDefinition: FormDefinition = {
         validationSchema,
-        submitClickCallback: async (data: SpotData) => {
+        submitClickCallback: async (data: RegisterCredentials) => {
             dispatch(sendRegisterRequest(data));
         },
         submitButtonText: 'Register'

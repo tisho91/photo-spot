@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as yup from 'yup';
 
-import { FormDefinition, UserCredentials } from '../../common/interfaces';
+import { FormDefinition, LoginCredentials } from '../../common/interfaces';
 import { sendLoginRequest } from '../../state/userSlice';
 import { email, password } from '../../common/utils';
 
@@ -23,7 +23,7 @@ const Login = () => {
 
     const formDefinition: FormDefinition = {
         validationSchema,
-        submitClickCallback: async (submitData: UserCredentials) => {
+        submitClickCallback: async (submitData: LoginCredentials) => {
             dispatch(sendLoginRequest(submitData));
         },
         submitButtonText: 'Login'
