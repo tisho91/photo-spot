@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { httpService } from '../common/services';
 import { createFormData } from '../common/utils';
+import { SpotData } from '../common/interfaces';
 
 
 const initialState = {
@@ -9,11 +10,11 @@ const initialState = {
 
 export const createNewSpotRequest = createAsyncThunk(
     'spots/createNewSpot',
-    async (data: any, thunkAPI) => {
+    async (data: SpotData, thunkAPI) => {
         try {
-            const response: any = await httpService.post('/spots', createFormData(data));
+            const response= await httpService.post('/spots', createFormData(data));
             return response.data;
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -23,9 +24,9 @@ export const getAllSpotsRequest = createAsyncThunk(
     'spots/getAllSpots',
     async (data: void, thunkAPI) => {
         try {
-            const response: any = await httpService.get('/spots');
+            const response = await httpService.get('/spots');
             return response.data;
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -36,7 +37,7 @@ export const spotSlice = createSlice({
     name: 'spots',
     initialState,
     reducers: {},
-    extraReducers: (builder: any) => {
+    extraReducers: (builder) => {
         builder.addCase(createNewSpotRequest.fulfilled, (state: any, action: any) => {
             return state;
         })

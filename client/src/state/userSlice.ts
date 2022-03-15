@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { httpService } from '../common/services';
 import { createFormData, getTokenData } from '../common/utils';
+import { LoginCredentials, RegisterCredentials, UserProfileRequestData } from '../common/interfaces';
 
 
 const initialState = {
@@ -11,11 +12,11 @@ const initialState = {
 
 export const sendLoginRequest = createAsyncThunk(
     'user/login',
-    async (loginData: any, thunkAPI) => {
+    async (credentials: LoginCredentials, thunkAPI) => {
         try {
-            const response: any = await httpService.post('/users/login', loginData);
+            const response = await httpService.post('/users/login', credentials);
             return response.data
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -25,9 +26,9 @@ export const getCurrentUserDataRequest = createAsyncThunk(
     'user/getUserData',
     async (data: void, thunkAPI) => {
         try {
-            const response: any = await httpService.get('/users/me');
+            const response = await httpService.get('/users/me');
             return response.data
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -36,11 +37,11 @@ export const getCurrentUserDataRequest = createAsyncThunk(
 
 export const sendRegisterRequest = createAsyncThunk(
     'user/register',
-    async (userData: any, thunkAPI) => {
+    async (credentials: RegisterCredentials, thunkAPI) => {
         try {
-            const response: any = await httpService.post('/users/signup', userData);
+            const response = await httpService.post('/users/signup', credentials);
             return response.data;
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -49,11 +50,11 @@ export const sendRegisterRequest = createAsyncThunk(
 
 export const sendUpdateProfileRequest = createAsyncThunk(
     'user/updateProfile',
-    async (data: any, thunkAPI) => {
+    async (user: UserProfileRequestData, thunkAPI) => {
         try {
-            const response: any = await httpService.patch('/users/me', createFormData(data));
+            const response = await httpService.patch('/users/me', createFormData(user));
             return response.data;
-        } catch (error: any) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -70,13 +71,13 @@ export const userSlice = createSlice({
             state.data = {};
         }
     },
-    extraReducers: (builder: any) => {
-        builder.addCase(sendLoginRequest.fulfilled, (state: any, action: any) => {
+    extraReducers: (builder) => {
+        builder.addCase(sendLoginRequest.fulfilled, (state, action: any) => {
             state.auth.token = action.payload.token;
             state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
         });
-        builder.addCase(sendRegisterRequest.fulfilled, (state: any, action: any) => {
+        builder.addCase(sendRegisterRequest.fulfilled, (state, action: any) => {
             state.auth.token = action.payload.token;
             state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
             return state
