@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { spotsSelector } from '../../state/spotSlice';
-import { appSelector, toggleSideMenu } from '../../state/appSlice';
+import { appSelector, closeSideMenu } from '../../state/appSlice';
+import { useOutsideClick } from '../../common/hooks';
+import { logout } from '../../state/userSlice';
 
 
 const StyledMenu = styled.nav<any>`
- 
+
   height: 100%;
   width: 33%;
   position: fixed;
@@ -23,19 +24,23 @@ const StyledMenu = styled.nav<any>`
   @media (max-width: 576px) {
     width: 100%;
   }
-  
+
 `
 
 
 const SideMenu = () => {
     const { isSideMenuOpen } = useSelector(appSelector)
     const dispatch = useDispatch();
+    const ref = useRef(null);
+    useOutsideClick(ref, () => {
+        dispatch(closeSideMenu())
+    });
     return (
-        <StyledMenu open={ isSideMenuOpen }>
+        <StyledMenu ref={ ref } open={ isSideMenuOpen }>
             <span>
                 <button onClick={ () => {
-                    dispatch(toggleSideMenu())
-                } }>close</button>
+                    dispatch(logout())
+                } }>logout</button>
             </span>
         </StyledMenu>
     );

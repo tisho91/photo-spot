@@ -6,8 +6,11 @@ interface AppReducer {
 }
 
 
-const toggleSideMenuAction = (state: AppReducer) => {
-    state.isSideMenuOpen = !state.isSideMenuOpen;
+const openSideMenuAction = (state: AppReducer) => {
+    state.isSideMenuOpen = true;
+}
+const closeSideMenuAction = (state: AppReducer) => {
+    state.isSideMenuOpen = false;
 }
 
 export const appSlice = createSlice({
@@ -16,10 +19,11 @@ export const appSlice = createSlice({
         isSideMenuOpen: false
     },
     reducers: {
-        toggleSideMenu: toggleSideMenuAction
+        openSideMenu: openSideMenuAction,
+        closeSideMenu: closeSideMenuAction
     }
 })
 
 export const appSelector = (state: any) => state.app;
-export const { toggleSideMenu } = appSlice.actions
+export const { openSideMenu, closeSideMenu } = appSlice.actions
 export default appSlice.reducer;
