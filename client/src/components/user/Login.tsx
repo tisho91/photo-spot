@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { sendLoginRequest } from "../../state/userSlice";
 import { emailValidation, passwordValidation } from "../../common/utils";
 
-import { AuthForm } from "./AuthForm";
+import { StyledForm } from "../form/StyledForm";
 import { FormInput } from "../form/input/StyledInputs";
 import AuthNavigation from "./AuthNavigation";
 import { AppPaths } from "../../common/constants/routes";
@@ -30,10 +30,10 @@ const Login = () => {
   };
   return (
     <>
-      <AuthForm {...formDefinition}>
+      <StyledForm {...formDefinition}>
         <FormInput type="email" id="email" name="email" />
         <FormInput type="password" id="password" name="password" />
-      </AuthForm>
+      </StyledForm>
       <AuthNavigation
         route={AppPaths.Register}
         linkText={"Register"}

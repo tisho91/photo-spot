@@ -11,7 +11,7 @@ import {
   nonEmptyString,
   passwordValidation,
 } from "../../common/utils";
-import { AuthForm } from "./AuthForm";
+import { StyledForm } from "../form/StyledForm";
 import { FormInput } from "../form/input/StyledInputs";
 import { AppPaths } from "../../common/constants/routes";
 import AuthNavigation from "./AuthNavigation";
@@ -34,11 +34,11 @@ const Register = () => {
   };
   return (
     <>
-      <AuthForm {...formDefinition}>
+      <StyledForm {...formDefinition}>
         <FormInput id="name" name="name" />
         <FormInput type="email" id="email" name="email" />
         <FormInput type="password" id="password" name="password" />
-      </AuthForm>
+      </StyledForm>
       <AuthNavigation
         route={AppPaths.Login}
         linkText={"Login"}

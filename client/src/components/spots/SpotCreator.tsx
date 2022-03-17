@@ -8,6 +8,15 @@ import GoogleAutocomplete from "../form/input/GoogleAutocomplete";
 import ImageInput from "../form/input/ImageInput";
 import { createFileReader } from "../../common/utils";
 import { FormProps, SpotData } from "../../common/types";
+import { StyledForm } from "../form/StyledForm";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+  margin: 0 auto;
+`;
 
 const SpotCreator = () => {
   const dispatch = useDispatch();
@@ -22,6 +31,7 @@ const SpotCreator = () => {
     }),
     submitClickCallback: async (spot: SpotData) => {
       const images = spot.images;
+
       for (const image of images) {
         createFileReader(image);
       }
@@ -31,14 +41,14 @@ const SpotCreator = () => {
   };
 
   return (
-    <div>
-      <Form {...formDefinition}>
-        <TextInput id="title" name="title" />
-        <TextInput id="description" name="description" />
+    <Wrapper>
+      <StyledForm {...formDefinition}>
+        <TextInput type="text" id="title" name="title" />
+        <TextInput type="text" id="description" name="description" />
         <GoogleAutocomplete id="address" name="address" />
         <ImageInput id="images" name="images" multiple />
-      </Form>
-    </div>
+      </StyledForm>
+    </Wrapper>
   );
 };
 

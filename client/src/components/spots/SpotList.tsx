@@ -15,7 +15,6 @@ const StyledSpotList = styled.ul`
 const StyledListItem = styled.li`
   min-width: 120px;
   min-height: 120px;
-  border: 1px solid red;
   margin: 5px;
 `;
 

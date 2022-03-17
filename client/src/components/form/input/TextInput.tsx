@@ -1,34 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { ErrorMessage, StyledInput, StyledLabel } from "./StyledInputs";
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
-`;
-
-const StyledInput = styled.input`
-  height: 40px;
-  background: #ffffff;
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  padding-left: 8px;
-  font-size: 16px;
-
-  :focus,
-  :hover {
-    background-color: #ffffff;
-  }
-`;
-
-const StyledLabel = styled.label`
-  font-size: 18px;
-  color: #fff;
-  text-transform: capitalize;
-`;
-
-const ErrorMessage = styled.span`
-  color: #d1193e;
 `;
 
 const TextInput = (props: any) => {

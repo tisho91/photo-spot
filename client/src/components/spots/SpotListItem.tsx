@@ -22,6 +22,7 @@ const StyledSpotListItem = styled.div<any>`
   width: 100%;
   height: 100%;
   background-position: center;
+  border-radius: 10px;
 
   > span {
     font-size: 12px;
