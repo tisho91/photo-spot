@@ -1,56 +1,61 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { httpService } from '../common/services';
-import { createFormData } from '../common/utils';
-import { SpotData } from '../common/interfaces';
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { httpService } from "../common/services";
+import { createFormData } from "../common/utils";
+import { SpotData } from "../common/types";
 
 const initialState = {
-    spots: []
+  spots: [],
 };
 
 export const createNewSpotRequest = createAsyncThunk(
-    'spots/createNewSpot',
-    async (data: SpotData, thunkAPI) => {
-        try {
-            const response= await httpService.post('/spots', createFormData(data));
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-        }
+  "spots/createNewSpot",
+  async (data: SpotData, thunkAPI) => {
+    try {
+      const response = await httpService.post("/spots", createFormData(data));
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
 
 export const getAllSpotsRequest = createAsyncThunk(
-    'spots/getAllSpots',
-    async (data: void, thunkAPI) => {
-        try {
-            const response = await httpService.get('/spots');
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-        }
+  "spots/getAllSpots",
+  async (data: void, thunkAPI) => {
+    try {
+      const response = await httpService.get("/spots");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
 
-
 export const spotSlice = createSlice({
-    name: 'spots',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(createNewSpotRequest.fulfilled, (state: any, action: any) => {
-            return state;
-        })
-        builder.addCase(createNewSpotRequest.rejected, (state: any, action: any) => {
-            return state;
-        })
-        builder.addCase(getAllSpotsRequest.fulfilled, (state: any, action: any) => {
-            state.spots = action.payload.spots;
-            return state;
-        })
-    }
-})
+  name: "spots",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(
+      createNewSpotRequest.fulfilled,
+      (state: any, action: any) => {
+        return state;
+      }
+    );
+    builder.addCase(
+      createNewSpotRequest.rejected,
+      (state: any, action: any) => {
+        return state;
+      }
+    );
+    builder.addCase(getAllSpotsRequest.fulfilled, (state: any, action: any) => {
+      state.spots = action.payload.spots;
+      return state;
+    });
+  },
+});
 
 export const spotsSelector = (state: any) => state.spots;
-export const findSpotByIdSelector = (spotId: string) => (state: any) => state.spots.spots.find((spot: any) => spot.id === spotId);
+export const findSpotByIdSelector = (spotId: string) => (state: any) =>
+  state.spots.spots.find((spot: any) => spot.id === spotId);
 export default spotSlice.reducer;

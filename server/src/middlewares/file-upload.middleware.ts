@@ -46,16 +46,3 @@ export const fileUpload = multer({
 
 export const fileUploadMultiple = fileUpload.array('images')
 
-
-// export const fileUploadDev = multer({
-//     storage: multer.diskStorage({
-//         destination: (req: any, file: any, cb: any) => {
-//             cb(null, 'uploads/images')
-//
-//         },
-//         filename: (req, file, cb) => {
-//             const ext = MIME_TYPE_MAP[file.mimetype];
-//             cb(null, `test.${ ext }`)
-//         },
-//     })
-// });
