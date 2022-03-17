@@ -1,22 +1,27 @@
-import Header from './components/header/Header';
-import { BrowserRouter } from 'react-router-dom';
-
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './common/routes';
+import { createGlobalStyle } from 'styled-components';
 
-import AppRoutes from './routes';
-
+const GlobalStyle = createGlobalStyle`
+  
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active{
+    font-size: 16px;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+`
 const App: React.FC = () => {
-
     return (
-            <div>
-                <div>
-                    <Header/>
-                        <BrowserRouter>
-                           <AppRoutes/>
-                        </BrowserRouter>
-                </div>
-            </div>
-        );
+        <>
+            <GlobalStyle/>
+            <BrowserRouter>
+                <AppRoutes/>
+            </BrowserRouter>
+        </>
+    );
 
 }
 

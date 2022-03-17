@@ -1,9 +1,13 @@
 import { Document } from 'mongoose';
-import { IUser } from './user.model';
+import { User } from './user.model';
 
-export interface IImage extends Document {
-    uploader: IUser['_id'],
+export interface Image extends Document {
+    uploader: User['_id'],
     url: string,
     upVotes?: number,
     downVotes?: number
+}
+
+export interface Sw3Image {
+location: string
 }

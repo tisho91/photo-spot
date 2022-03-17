@@ -1,5 +1,5 @@
 import { Model, model, Schema, Types } from 'mongoose';
-import { ISpot } from './spot.model';
+import { Spot as ISpot } from './spot.model';
 import User from './user.schema';
 
 

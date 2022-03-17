@@ -1,10 +1,10 @@
 import { Document } from 'mongoose';
-import { ISpot } from './spot.model';
+import { Spot } from './spot.model';
 
-export interface IUser extends Document {
+export interface User extends Document {
     name: string;
     email: string;
     password: string;
-    spots: ISpot[],
+    spots: Spot[],
     avatar?: string;
 }

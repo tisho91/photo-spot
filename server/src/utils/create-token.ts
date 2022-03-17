@@ -1,6 +1,12 @@
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
+import { ISODateTimeString } from 'aws-sdk/clients/iotwireless';
 
-export const createToken = (userId: string): any => {
+export interface Token {
+    token: string,
+    tokenExpirationDate: ISODateTimeString;
+}
+
+export const createToken = (userId: string): Token => {
     const privateKey = process.env.JWT_PRIVATE_KEY as string;
     const expiresIn = '1d'
     const token = sign(

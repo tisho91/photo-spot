@@ -1,16 +1,16 @@
-import { IUser } from './user.model';
-import { IImage } from './image.model';
+import { User } from './user.model';
+import { Image } from './image.model';
 
-interface ICoordinates {
+interface Coordinates {
     lng: number,
     lat: number
 }
 
-export interface ISpot extends Document {
+export interface Spot extends Document {
     title: string,
     description: string,
     address: string,
-    creator: IUser['_id'],
-    images:  IImage['_id'],
-    coordinates: ICoordinates
+    creator: User['_id'],
+    images:  Image['_id'],
+    coordinates: Coordinates
 }
