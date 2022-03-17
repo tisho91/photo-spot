@@ -1,6 +1,7 @@
 {
   "name": "@photo-spot/client",
   "version": "1.0.0",
+  "homepage": "https://photo-spot.herokuapp.com",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^2.8.1",
