@@ -1,2 +1,2 @@
 # photo-spot
-https://photo-spot.herokuapp.com/
+Live Demo: https://photo-spot.herokuapp.com/
