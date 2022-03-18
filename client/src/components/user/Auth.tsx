@@ -1,6 +1,6 @@
-import React from "react";
-import AuthRouter from "./AuthRouter";
-import styled from "styled-components";
+import React from 'react';
+import AuthRouter from './AuthRouter';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const AuthWrapper = styled(AuthRouter)`
   width: 100%;
   padding: 20px;
 `;
-const imgUrl = "../../assets/images/splash-image-auth.png";
+const imgUrl = '../../assets/images/splash-image-auth.png';
 const SideImage = styled.div`
   background-image: url(${imgUrl});
   width: 100%;

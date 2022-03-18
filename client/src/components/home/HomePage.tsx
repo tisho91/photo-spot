@@ -1,14 +1,12 @@
 import React from 'react';
 import SpotList from '../spots/SpotList';
 
-
-
 const HomePage = () => {
-    return (
-        <>
-            <SpotList/>
-        </>
-    );
+  return (
+    <>
+      <SpotList />
+    </>
+  );
 };
 
 export default HomePage;

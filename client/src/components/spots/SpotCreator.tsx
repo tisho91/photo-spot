@@ -1,15 +1,15 @@
-import React from "react";
-import Form from "../form/Form";
-import * as yup from "yup";
-import { useDispatch } from "react-redux";
-import { createNewSpotRequest } from "../../state/spotSlice";
-import TextInput from "../form/input/TextInput";
-import GoogleAutocomplete from "../form/input/GoogleAutocomplete";
-import ImageInput from "../form/input/ImageInput";
-import { createFileReader } from "../../common/utils";
-import { FormProps, SpotData } from "../../common/types";
-import { StyledForm } from "../form/StyledForm";
-import styled from "styled-components";
+import React from 'react';
+import Form from '../form/Form';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { createNewSpotRequest } from '../../state/spotSlice';
+import TextInput from '../form/input/TextInput';
+import GoogleAutocomplete from '../form/input/GoogleAutocomplete';
+import ImageInput from '../form/input/ImageInput';
+import { createFileReader } from '../../common/utils';
+import { FormProps, SpotData } from '../../common/types';
+import { StyledForm } from '../form/StyledForm';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const SpotCreator = () => {
       title: yup.string().required(),
       description: yup.string(),
       address: yup.string().required(),
-      images: yup.mixed().test("images", "Must not be Empty", (files) => {
+      images: yup.mixed().test('images', 'Must not be Empty', (files) => {
         return files.length;
       }),
     }),
@@ -37,7 +37,7 @@ const SpotCreator = () => {
       }
       dispatch(createNewSpotRequest({ ...spot, images }));
     },
-    submitButtonText: "Submit",
+    submitButtonText: 'Submit',
   };
 
   return (

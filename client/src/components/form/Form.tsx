@@ -1,8 +1,8 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitButton } from "./input/StyledButtons";
-import { FormProps } from "../../common/types";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitButton } from './input/StyledButtons';
+import { FormProps } from '../../common/types';
 
 const Form: React.FC<FormProps> = (props: FormProps) => {
   const {
@@ -38,14 +38,14 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
   const renderChildren = () => {
     return Array.isArray(children)
       ? children.map((child) => {
-          return child.props.name ? renderChildElement(child) : child;
-        })
+        return child.props.name ? renderChildElement(child) : child;
+      })
       : renderChildElement(children);
   };
   return (
     <form className={props.className} onSubmit={onSubmit}>
       {renderChildren()}
-      <SubmitButton type="submit">{submitButtonText || "text"}</SubmitButton>
+      <SubmitButton type="submit">{submitButtonText || 'text'}</SubmitButton>
     </form>
   );
 };

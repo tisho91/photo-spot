@@ -1,16 +1,16 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import * as yup from "yup";
+import * as yup from 'yup';
 
-import { sendLoginRequest } from "../../state/userSlice";
-import { emailValidation, passwordValidation } from "../../common/utils";
+import { sendLoginRequest } from '../../state/userSlice';
+import { emailValidation, passwordValidation } from '../../common/utils';
 
-import { StyledForm } from "../form/StyledForm";
-import { FormInput } from "../form/input/StyledInputs";
-import AuthNavigation from "./AuthNavigation";
-import { AppPaths } from "../../common/constants/routes";
-import { FormProps, LoginCredentials } from "../../common/types";
+import { StyledForm } from '../form/StyledForm';
+import { FormInput } from '../form/input/StyledInputs';
+import AuthNavigation from './AuthNavigation';
+import { AppPaths } from '../../common/constants/routes';
+import { FormProps, LoginCredentials } from '../../common/types';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Login = () => {
     submitClickCallback: async (loginData: LoginCredentials) => {
       dispatch(sendLoginRequest(loginData));
     },
-    submitButtonText: "Login",
+    submitButtonText: 'Login',
   };
   return (
     <>
@@ -36,8 +36,8 @@ const Login = () => {
       </StyledForm>
       <AuthNavigation
         route={AppPaths.Register}
-        linkText={"Register"}
-        helperText={"Don’t have an account?"}
+        linkText={'Register'}
+        helperText={'Don’t have an account?'}
       />
     </>
   );

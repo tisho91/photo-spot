@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const StyledImageInput = styled.div`
   display: flex;
@@ -11,8 +11,9 @@ const StyledImageInput = styled.div`
   label,
   img {
     color: #ffffff;
+    background-color: #d0d0d0;
     width: 100px;
-    height: 100px;
+    height: 100px; 
     display: block;
     border-radius: 10px;
     border: 1px solid #fff;
@@ -23,11 +24,13 @@ const StyledImageInput = styled.div`
 const ImageInput = (props: any) => {
   const { register } = props;
   const [images, setImages] = useState();
-  const [previewUrls, setPreviewUrls] = useState<any>([]);
+  const initialState = props.previewUrls || [];
+  const [previewUrls, setPreviewUrls] = useState<any>(initialState);
+  console.log(initialState);
 
   const addPreviewUrl = (url: any) => {
     setPreviewUrls((previewUrls: any[]) => {
-      return [...previewUrls, url];
+      return props.multiple ? [...previewUrls, url] : [url];
     });
   };
   useEffect(() => {
@@ -62,10 +65,10 @@ const ImageInput = (props: any) => {
         value={images}
       />
       <label htmlFor={props.id}>+</label>
-      {!!previewUrls
+      {previewUrls
         ? previewUrls.map((url: string, index: number) => (
-            <img key={index} src={url} />
-          ))
+          <img key={index} src={url} />
+        ))
         : null}
     </StyledImageInput>
   );

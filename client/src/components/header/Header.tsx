@@ -1,12 +1,12 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, userSelector } from "../../state/userSlice";
-import styled from "styled-components";
-import { StyledChildComponent } from "../../common/types";
-import SideMenu from "../home/SideMenu";
-import { SignOutButton } from "../form/input/StyledButtons";
-import { AppPaths } from "../../common/constants/routes";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, userSelector } from '../../state/userSlice';
+import styled from 'styled-components';
+import { StyledChildComponent } from '../../common/types';
+import SideMenu from '../home/SideMenu';
+import { SignOutButton } from '../form/input/StyledButtons';
+import { AppPaths } from '../../common/constants/routes';
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   height: 70px;

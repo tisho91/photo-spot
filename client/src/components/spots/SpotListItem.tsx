@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { SpotData, StyledChildComponent } from "../../common/types";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SpotData, StyledChildComponent } from '../../common/types';
+import styled from 'styled-components';
 
 type Image = {
   url: string;
@@ -37,7 +37,7 @@ const StyledSpotListItem = styled.div<any>`
 const SpotListItem = (props: StyledSpotListItem) => {
   const imgUrl =
     props.images[0]?.url ||
-    "https://webcolours.ca/wp-content/uploads/2020/10/webcolours-unknown.png";
+    'https://webcolours.ca/wp-content/uploads/2020/10/webcolours-unknown.png';
   return (
     <Link className={props.className} to={`/spots/${props.id}`}>
       <StyledSpotListItem img={imgUrl}>

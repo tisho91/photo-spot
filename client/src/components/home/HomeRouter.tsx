@@ -8,14 +8,14 @@ import Spot from '../spots/Spot';
 import Profile from '../user/Profile';
 
 const HomeRouter = () => {
-    return (
-        <Switch>
-            <PrivateRoute path={ AppPaths.AddSpot } component={ SpotCreator } exact/>
-            <PrivateRoute path={ AppPaths.SpotList } component={ SpotList } exact/>
-            <PrivateRoute path={ AppPaths.SpotListItem } component={ Spot } exact/>
-            <PrivateRoute path={ AppPaths.EditUser } component={ Profile } exact/>
-        </Switch>
-    );
+  return (
+    <Switch>
+      <PrivateRoute path={ AppPaths.AddSpot } component={ SpotCreator } exact/>
+      <PrivateRoute path={ AppPaths.SpotList } component={ SpotList } exact/>
+      <PrivateRoute path={ AppPaths.SpotListItem } component={ Spot } exact/>
+      <PrivateRoute path={ AppPaths.EditUser } component={ Profile } exact/>
+    </Switch>
+  );
 };
 
 export default HomeRouter;

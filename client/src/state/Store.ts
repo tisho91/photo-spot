@@ -6,12 +6,12 @@ import { errorHandlerMiddleware } from './error-handler.middleware';
 import spotsReducer from './spotSlice';
 
 const store = configureStore({
-    reducer: {
-        app: appSlice,
-        user: userSlice,
-        spots: spotsReducer
-    },
-    middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(localStorageMiddleware, errorHandlerMiddleware),
+  reducer: {
+    app: appSlice,
+    user: userSlice,
+    spots: spotsReducer
+  },
+  middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(localStorageMiddleware, errorHandlerMiddleware),
 });
 
 export default store;

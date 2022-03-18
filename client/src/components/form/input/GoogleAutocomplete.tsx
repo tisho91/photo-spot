@@ -1,13 +1,13 @@
-import React from "react";
-import { usePlacesWidget } from "react-google-autocomplete";
-import { StyledInput, StyledLabel } from "./StyledInputs";
+import React from 'react';
+import { usePlacesWidget } from 'react-google-autocomplete';
+import { StyledInput, StyledLabel } from './StyledInputs';
 
 const GoogleAutocomplete = (props: any) => {
   const { setValue } = props;
   const { ref } = usePlacesWidget<HTMLInputElement>({
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     options: {
-      types: ["geocode", "establishment"],
+      types: ['geocode', 'establishment'],
     },
     onPlaceSelected: (place) => {
       const coordinates = {
@@ -15,7 +15,7 @@ const GoogleAutocomplete = (props: any) => {
         lng: place.geometry?.location?.lng(),
       };
       setValue(props.id, place.formatted_address);
-      setValue("coordinates", coordinates);
+      setValue('coordinates', coordinates);
     },
   });
   return (

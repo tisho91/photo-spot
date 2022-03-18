@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { ErrorMessage, StyledInput, StyledLabel } from "./StyledInputs";
+import React from 'react';
+import styled from 'styled-components';
+import { ErrorMessage, StyledInput, StyledLabel } from './StyledInputs';
 
 const Wrapper = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const TextInput = (props: any) => {
-  const { register, setValue, errors } = props;
+  const { register, errors } = props;
   return (
     <Wrapper className={props.className}>
       <StyledLabel htmlFor={props.id}>{props.name}</StyledLabel>
