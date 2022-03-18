@@ -1,43 +1,53 @@
-import Input from "../input/Input";
-import FormButton from "../formButton/FormButton";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitButton } from './input/StyledButtons';
+import { FormProps } from '../../common/types';
 
-export interface FormDefinition {
-    fields: any[],
-    submitClickCallback: (data:any) => void,
-    title? : string,
-    validationSchema: any,
-    submitButtonText: string,
-    initialValues: any
-}
+const Form: React.FC<FormProps> = (props: FormProps) => {
+  const {
+    submitClickCallback,
+    validationSchema,
+    submitButtonText,
+    children,
+    defaultValues,
+  } = props;
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    setValue,
+  } = useForm<any>({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  });
+  const onSubmit = handleSubmit((data) => submitClickCallback(data));
 
-const Form = (props: FormDefinition) => {
-    const { fields, submitClickCallback, title, validationSchema, submitButtonText } = props;
-    const { handleSubmit, register, formState: { errors } } = useForm<any>({
-        resolver: yupResolver(validationSchema)
+  const renderChildElement = (child: any) => {
+    return React.createElement(child.type, {
+      ...{
+        ...child.props,
+        errors: errors[child.props.id],
+        register,
+        setValue,
+        key: child.props.name,
+      },
     });
-    const onSubmit = handleSubmit(data => submitClickCallback(data));
-
-    return (
-        <form onSubmit={onSubmit}>
-            <h2>{title}</h2>
-            {
-                fields.map((item: any) =>
-                    <Input
-                        errors={errors[item.id]}
-                        register={register}
-                        key={item.id}
-                        {...item}
-                    />
-                )
-            }
-            <div className='submit-wrapper'>
-                <FormButton className='submit-button' text={submitButtonText} type='submit'/>
-            </div>
-        </form>
-    );
+  };
+  const renderChildren = () => {
+    return Array.isArray(children)
+      ? children.map((child) => {
+        return child.props.name ? renderChildElement(child) : child;
+      })
+      : renderChildElement(children);
+  };
+  return (
+    <form className={props.className} onSubmit={onSubmit}>
+      {renderChildren()}
+      <SubmitButton type="submit">{submitButtonText || 'text'}</SubmitButton>
+    </form>
+  );
 };
 
 export default Form;

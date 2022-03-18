@@ -1,11 +1,11 @@
 import React from 'react';
 
 const PageNotFound = () => {
-    return (
-        <div>
+  return (
+    <div>
             404 - page not found
-        </div>
-    );
+    </div>
+  );
 };
 
 export default PageNotFound;

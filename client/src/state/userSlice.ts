@@ -1,86 +1,108 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { sendLogoutRequest } from './authSlice';
-import { uploadAvatar } from '../services/auth'
+import { httpService } from '../common/services';
+import { createFormData, getTokenData } from '../common/utils';
+import {
+  LoginCredentials,
+  RegisterCredentials,
+  UserProfileRequestData,
+} from '../common/types';
 
 const initialState = {
-    email: '',
-    displayName: '',
-    hasAvatar: false,
-    avatar: '',
-    userDataRequestComplete: false //TODO check if needed
-}
-// TODO decide between avatarUrl: string || hasAvatar:boolean
+  auth: { ...getTokenData() },
+  data: {},
+};
 
-export const getUserDataRequest = createAsyncThunk(
-    'user/getData',
-    async (uid: any, thunkAPI) => {
-        try {
-            return {};
-        } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
-        }
+export const sendLoginRequest = createAsyncThunk(
+  'user/login',
+  async (credentials: LoginCredentials, thunkAPI) => {
+    try {
+      const response = await httpService.post('/users/login', credentials);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
 
-export const setUserData = createAsyncThunk(
-    'user/setData',
-    async (data: any, thunkAPI) => {
-        try {
-            return {}
-        } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
-        }
+export const getCurrentUserDataRequest = createAsyncThunk(
+  'user/getUserData',
+  async (data: void, thunkAPI) => {
+    try {
+      const response = await httpService.get('/users/me');
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
-export const setUserAvatar = createAsyncThunk(
-    'user/setAvatar',
-    async ({ avatar, uid }: any, thunkAPI) => {
-        try {
-            const response: any = await uploadAvatar(avatar);
-            const data = await response.json()
-            if (!response.ok) {
-                return thunkAPI.rejectWithValue({ error: data.message });
-            }
-            return { ...data };
-        } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.message });
-        }
+
+export const sendRegisterRequest = createAsyncThunk(
+  'user/register',
+  async (credentials: RegisterCredentials, thunkAPI) => {
+    try {
+      const response = await httpService.post('/users/signup', credentials);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
+);
+
+export const sendUpdateProfileRequest = createAsyncThunk(
+  'user/updateProfile',
+  async (user: UserProfileRequestData, thunkAPI) => {
+    try {
+      const response = await httpService.patch(
+        '/users/me',
+        createFormData(user)
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
 );
 
 export const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {},
-    extraReducers: (builder: any) => {
-        builder.addCase(getUserDataRequest.fulfilled, (state: any, action: any) => {
-            state.userDataRequestComplete = true
-            state.displayName = action.payload?.displayName
-            state.hasAvatar = action.payload?.hasAvatar
-            state.avatarUrl = action.payload?.avatarUrl
-            return state;
-        });
-        builder.addCase(setUserData.fulfilled, (state: any, action: any) => {
-            state.email = action.payload?.email
-            state.displayName = action.payload?.displayName
-            state.hasAvatar = action.payload?.hasAvatar
-            state.avatarUrl = action.payload?.avatarUrl
-            return state;
-        });
-        builder.addCase(sendLogoutRequest.fulfilled, (state: any, action: any) => {
-            return initialState;
-        });
-        builder.addCase(setUserData.rejected, (state: any, action: any) => {
-            console.log('error', action.payload)
-        });
-        builder.addCase(setUserAvatar.fulfilled, (state: any, action: any) => {
-            state.hasAvatar = !!action.payload
-            state.avatar = action.payload.avatar
-        });
-        builder.addCase(setUserAvatar.rejected, (state: any, action: any) => {
-            console.log('error', action.payload)
-        });
-    }
-})
-export const userSelector = (state: any) => state.user;
+  name: 'user',
+  initialState,
+  reducers: {
+    logout: (state) => {
+      state.auth.token = null;
+      state.auth.tokenExpirationDate = null;
+      state.data = {};
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(sendLoginRequest.fulfilled, (state, action: any) => {
+      state.auth.token = action.payload.token;
+      state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
+      return state;
+    });
+    builder.addCase(sendRegisterRequest.fulfilled, (state, action: any) => {
+      state.auth.token = action.payload.token;
+      state.auth.tokenExpirationDate = action.payload.tokenExpirationDate;
+      return state;
+    });
+    builder.addCase(
+      getCurrentUserDataRequest.fulfilled,
+      (state: any, action: any) => {
+        state.data = action.payload.user;
+        return state;
+      }
+    );
+    builder.addCase(
+      sendUpdateProfileRequest.fulfilled,
+      (state: any, action: any) => {
+        state.user = action.payload.user;
+        return state;
+      }
+    );
+  },
+});
+
+export const authSelector = (state: any): any => state.user.auth;
+export const userSelector = (state: any): any => state.user.data;
+const { actions } = userSlice;
+export const { logout } = actions;
 export default userSlice.reducer;

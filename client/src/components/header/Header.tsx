@@ -1,37 +1,55 @@
 import React from 'react';
-import './Header.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, sendLogoutRequest } from '../../state/authSlice';
-import FormButton from '../formButton/FormButton';
-import { userSelector } from '../../state/userSlice';
+import { logout, userSelector } from '../../state/userSlice';
+import styled from 'styled-components';
+import { StyledChildComponent } from '../../common/types';
+import SideMenu from '../home/SideMenu';
+import { SignOutButton } from '../form/input/StyledButtons';
+import { AppPaths } from '../../common/constants/routes';
+import { Link } from 'react-router-dom';
 
+const HeaderWrapper = styled.header`
+  height: 70px;
+  background-color: #171717;
+  color: #fff;
+  display: flex;
+  width: 100%;
+  align-items: center;
+`;
+const MessageWrapper = styled.span`
+  align-self: center;
+  font-size: 18px;
+  width: 100%;
+`;
 
+const StyledLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: none;
 
-const Header= () => {
-    const { uid } = useSelector(authSelector);
-    const { displayName } = useSelector(userSelector);
-    const dispatch = useDispatch();
-    const signOutButtonProps = {
-        text: 'Sign Out',
-        className: 'sign-out',
-        onClick: ()=>{
-            dispatch(sendLogoutRequest())
-        }
-    }
+  :hover {
+    text-decoration: underline;
+  }
+`;
 
-
-    return (
-        <div className='header'>
-            <div className='welcome-message'>
-                <span>{displayName? `Hello ${displayName}`: 'Welcome'}</span>
-            </div>
-            { uid ?
-                <div className='sign-out-wrapper'>
-                    <FormButton {...signOutButtonProps}/>
-                </div>
-                : null}
-        </div>
-    );
+const Header = (props: StyledChildComponent) => {
+  const { name } = useSelector(userSelector);
+  const dispatch = useDispatch();
+  return (
+    <HeaderWrapper className={props.className}>
+      <MessageWrapper>
+        Hello,&nbsp;
+        <StyledLink to={AppPaths.EditUser}>{name}</StyledLink>
+      </MessageWrapper>
+      <SignOutButton
+        onClick={() => {
+          dispatch(logout());
+        }}
+      >
+        Sign Out
+      </SignOutButton>
+      <SideMenu />
+    </HeaderWrapper>
+  );
 };
 
 export default Header;
