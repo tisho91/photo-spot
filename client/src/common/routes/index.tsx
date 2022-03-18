@@ -12,9 +12,8 @@ import Spot from '../../components/spots/Spot';
 import { getAllSpotsRequest } from '../../state/spotSlice';
 import SpotCreator from '../../components/spots/SpotCreator';
 import Header from '../../components/header/Header';
-import styled from 'styled-components';
 
-const AppRoutes = () => { 
+const AppRoutes = () => {
   const { token } = useSelector(authSelector);
   const dispatch = useDispatch();
   useEffect(() => {

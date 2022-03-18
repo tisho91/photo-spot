@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const Map = (props: any) => {
+const GoogleMap = (props: any) => {
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY as string;
   return (
     <GoogleMapReact
@@ -9,9 +9,9 @@ const Map = (props: any) => {
       defaultCenter={props.center}
       defaultZoom={props.zoom}
     >
-      {/*    Markers*/}
+      <span style={{color:'#000000'}}>MARKER!</span>
     </GoogleMapReact>
   );
 };
 
-export default Map;
+export default GoogleMap;

@@ -1,6 +1,6 @@
 import { Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 export const localStorageMiddleware: Middleware = (store: MiddlewareAPI) => (next: any) => async (action: any) => {
   if ([ LOGIN_FULFILLED_ACTION, REGISTER_FULFILLED_ACTION ].includes(action.type)) {
     localStorage.setItem('token', action.payload.token);

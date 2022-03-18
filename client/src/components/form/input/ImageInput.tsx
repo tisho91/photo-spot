@@ -23,7 +23,7 @@ const StyledImageInput = styled.div`
 
 const ImageInput = (props: any) => {
   const { register } = props;
-  const [images, setImages] = useState();
+  const [images] = useState();
   const initialState = props.previewUrls || [];
   const [previewUrls, setPreviewUrls] = useState<any>(initialState);
   console.log(initialState);

@@ -7,14 +7,13 @@ type Image = {
   url: string;
 };
 
-type StyledSpotListItem = StyledChildComponent &
+type StyledSpotListItemProps = StyledChildComponent &
   SpotData & {
     images: Image[];
     id: string;
   };
 
 const StyledSpotListItem = styled.div<any>`
-  //background-color: red;
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-repeat: no-repeat;
@@ -34,7 +33,7 @@ const StyledSpotListItem = styled.div<any>`
   }
 `;
 
-const SpotListItem = (props: StyledSpotListItem) => {
+const SpotListItem = (props: StyledSpotListItemProps) => {
   const imgUrl =
     props.images[0]?.url ||
     'https://webcolours.ca/wp-content/uploads/2020/10/webcolours-unknown.png';

@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from '../form/Form';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';

@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./common/routes";
-import { createGlobalStyle } from "styled-components";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './common/routes';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body{
