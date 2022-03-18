@@ -26,7 +26,6 @@ const ImageInput = (props: any) => {
   const [images] = useState();
   const initialState = props.previewUrls || [];
   const [previewUrls, setPreviewUrls] = useState<any>(initialState);
-  console.log(initialState);
 
   const addPreviewUrl = (url: any) => {
     setPreviewUrls((previewUrls: any[]) => {
@@ -37,7 +36,6 @@ const ImageInput = (props: any) => {
     if (!images) {
       return;
     }
-    console.log(images);
   }, [images]);
   const handleChange = (e: any) => {
     const images = e.target.files;

@@ -28,7 +28,6 @@ const MapWrapper = styled.div`
 const Spot = () => {
   const { id } = useParams<{ id: string }>();
   const spot = useSelector(findSpotByIdSelector(id));
-  console.log(spot);
   return (
     <StyledWrapper>
       {spot ? (

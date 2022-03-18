@@ -34,7 +34,6 @@ const Profile = () => {
     },
     submitClickCallback: async (user: UserProfileFormData) => {
       const avatar = user.avatar[0];
-      console.log(avatar);
       createFileReader(avatar);
       dispatch(sendUpdateProfileRequest({ name: user.name, avatar }));
     },

@@ -9,7 +9,6 @@ const GoogleMap = (props: any) => {
       defaultCenter={props.center}
       defaultZoom={props.zoom}
     >
-      <span style={{color:'#000000'}}>MARKER!</span>
     </GoogleMapReact>
   );
 };
