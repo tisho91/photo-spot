@@ -9,12 +9,12 @@
     "server/"
   ],
   "scripts": {
-    "app": "yarn workspace @photo-spot/client start",
+    "client": "yarn workspace @photo-spot/client start",
     "server": "yarn workspace @photo-spot/server serve",
     "server:prod": "yarn workspace @photo-spot/server start",
-    "build-app": "yarn workspace @photo-spot/client build",
+    "build-client": "yarn workspace @photo-spot/client build",
     "start": "yarn workspace @photo-spot/server start",
-    "start:dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn app \"",
+    "start:dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client \"",
     "postinstall": "yarn workspace @photo-spot/server build",
     "heroku-postbuild": "yarn build-app"
   },
