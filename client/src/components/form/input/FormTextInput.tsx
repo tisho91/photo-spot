@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   flex-flow: column;
 `;
 
-const TextInput = (props: any) => {
+const FormTextInput = (props: any) => {
   const { register, errors } = props;
   return (
     <Wrapper className={props.className}>
@@ -23,4 +23,4 @@ const TextInput = (props: any) => {
   );
 };
 
-export default TextInput;
+export default FormTextInput;

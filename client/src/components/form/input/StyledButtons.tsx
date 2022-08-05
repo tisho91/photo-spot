@@ -10,15 +10,16 @@ export const BaseButton = styled.button`
   :hover {
     cursor: pointer;
   }
-`
+`;
 
-export const SignOutButton = styled(BaseButton)`
-  height: 36px;
-  width: 100px;
-  margin-right: 10px;
-  align-self: center;
-  font-size: 16px;
-`
+export const SignOutButton = styled.span`
+    font-family: 'Material Icons';
+    font-size: 18px;
+    color: #F86E51;
+    :hover {
+      cursor: pointer;
+    }
+`;
 
 export const SubmitButton = styled(BaseButton)`
   height: 40px;
@@ -27,4 +28,4 @@ export const SubmitButton = styled(BaseButton)`
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
-`
+`;

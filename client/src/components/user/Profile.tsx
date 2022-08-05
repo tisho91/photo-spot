@@ -8,7 +8,7 @@ import { AppPaths } from '../../common/constants/routes';
 import { sendUpdateProfileRequest, userSelector } from '../../state/userSlice';
 
 import Form from '../form/Form';
-import TextInput from '../form/input/TextInput';
+import FormTextInput from '../form/input/FormTextInput';
 import ImageInput from '../form/input/ImageInput';
 
 import {
@@ -43,7 +43,7 @@ const Profile = () => {
   return (
     <>
       <Form {...formDefinition}>
-        <TextInput id="name" name="name" />
+        <FormTextInput id="name" name="name" />
         <ImageInput id="avatar" name="avatar" previewUrls={[avatar]} />
       </Form>
       <Link to={AppPaths.Home}>go back</Link>
