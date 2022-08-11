@@ -5,6 +5,9 @@ import { localStorageMiddleware, } from './local-storage.middleware';
 import { errorHandlerMiddleware } from './error-handler.middleware';
 import spotsReducer from './spotSlice';
 
+
+// Test comment
+
 const store = configureStore({
   reducer: {
     app: appSlice,
