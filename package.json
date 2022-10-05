@@ -16,7 +16,7 @@
     "start": "yarn workspace @photo-spot/server start",
     "start:dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client \"",
     "postinstall": "yarn workspace @photo-spot/server build",
-    "heroku-postbuild": "yarn build-app"
+    "heroku-postbuild": "yarn build-client"
   },
   "dependencies": {
     "concurrently": "^6.0.2"
