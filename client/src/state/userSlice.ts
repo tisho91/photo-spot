@@ -43,6 +43,7 @@ export const sendRegisterRequest = createAsyncThunk(
       const response = await httpService.post('/users/signup', credentials);
       return response.data;
     } catch (error) {
+      console.log('error', error);
       return thunkAPI.rejectWithValue(error);
     }
   }
