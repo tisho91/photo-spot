@@ -5,7 +5,7 @@ import { StyledInput, StyledLabel } from './StyledInputs';
 const GoogleAutocomplete = (props: any) => {
   const { setValue } = props;
   const { ref } = usePlacesWidget<HTMLInputElement>({
-    apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    apiKey: import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY,
     options: {
       types: ['geocode', 'establishment'],
     },

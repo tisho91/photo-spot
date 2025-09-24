@@ -4,7 +4,7 @@ import { getTokenData } from '../utils';
 const axiosWithDefaultOptions = (options: any): any => {
   const { token } = getTokenData();
   const defaultOptions = {
-    baseURL: process.env.REACT_APP_BACKEND_URL,
+    baseURL: import.meta.env.VITE_REACT_APP_BACKEND_URL,
     headers: {
       Authorization: 'bearer ' + token,
     },
