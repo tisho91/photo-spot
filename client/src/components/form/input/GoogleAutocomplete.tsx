@@ -1,6 +1,7 @@
 import React from 'react';
 import { usePlacesWidget } from 'react-google-autocomplete';
 import { StyledInput, StyledLabel } from './StyledInputs';
+import GoogleMap from "../../spots/GoogleMap";
 
 const GoogleAutocomplete = (props: any) => {
   const { setValue } = props;
@@ -22,6 +23,7 @@ const GoogleAutocomplete = (props: any) => {
     <>
       <StyledLabel htmlFor={props.id}>{props.name}</StyledLabel>
       <StyledInput ref={ref} autoComplete="off" />
+      <GoogleMap />
     </>
   );
 };

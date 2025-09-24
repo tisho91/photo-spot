@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router';
 import Login from './Login';
 import Register from './Register';
 import { AppPaths } from '../../common/constants/routes';
-import Logo from '../Logo';
+import Logo from '../logo/Logo';
 import styled from 'styled-components';
 import { StyledChildComponent } from '../../common/types';
 

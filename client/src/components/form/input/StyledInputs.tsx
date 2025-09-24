@@ -1,22 +1,21 @@
 import styled from 'styled-components';
-import TextInput from './TextInput';
+import FormTextInput from './FormTextInput';
 
-export const FormInput = styled(TextInput)`
+export const FormInput = styled(FormTextInput)`
   margin-bottom: 15px;
 `;
 
 export const StyledInput = styled.input`
   height: 40px;
-  background: #ffffff;
+  background: #393939;
   border-radius: 8px;
   outline: none;
   border: none;
   padding-left: 8px;
-  font-size: 16px;
-
-  :focus,
-  :hover {
-    background-color: #ffffff;
+  font-size: 18px;
+  color:#fff;
+  &.withIcon{
+    padding-left: 50px;
   }
 `;
 

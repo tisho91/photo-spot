@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { StyledChildComponent } from '../../common/types';
 
 const StyledText = styled.span`
-  font-size: 18px;
+font-size: 24px;
   color: #ffffff;
 `;
 const StyledLink = styled(Link)`

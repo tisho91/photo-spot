@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createNewSpotRequest } from '../../state/spotSlice';
-import TextInput from '../form/input/TextInput';
+import FormTextInput from '../form/input/FormTextInput';
 import GoogleAutocomplete from '../form/input/GoogleAutocomplete';
 import ImageInput from '../form/input/ImageInput';
 import { createFileReader } from '../../common/utils';
@@ -42,8 +42,8 @@ const SpotCreator = () => {
   return (
     <Wrapper>
       <StyledForm {...formDefinition}>
-        <TextInput type="text" id="title" name="title" />
-        <TextInput type="text" id="description" name="description" />
+        <FormTextInput type="text" id="title" name="title" />
+        <FormTextInput type="text" id="description" name="description" />
         <GoogleAutocomplete id="address" name="address" />
         <ImageInput id="images" name="images" multiple />
       </StyledForm>

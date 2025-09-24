@@ -3,7 +3,7 @@ import { Spot as ISpot } from './spot.model';
 import User from './user.schema';
 
 
-const spotSchema: Schema = new Schema({
+const spotSchema: Schema = new Schema<ISpot>({
     title: { type: String, required: true },
     description: { type: String, required: false },
     address: { type: String, required: true },

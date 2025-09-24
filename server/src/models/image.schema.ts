@@ -10,5 +10,5 @@ const imageSchema: Schema = new Schema({
     downVotes: { type: Number, required: false }
 })
 
-const Image: Model<IImage> = model('Image', imageSchema);
+const Image: Model<any> = model('Image', imageSchema);
 export default Image;

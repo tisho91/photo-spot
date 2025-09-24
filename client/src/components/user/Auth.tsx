@@ -2,10 +2,12 @@ import React from 'react';
 import AuthRouter from './AuthRouter';
 import styled from 'styled-components';
 
+const imgUrl = '../../assets/images/background.png';
+
 const Wrapper = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #171717;
+  width: 100%;
 `;
 
 const AuthWrapper = styled(AuthRouter)`
@@ -13,24 +15,13 @@ const AuthWrapper = styled(AuthRouter)`
   width: 100%;
   padding: 20px;
 `;
-const imgUrl = '../../assets/images/splash-image-auth.png';
-const SideImage = styled.div`
-  background-image: url(${imgUrl});
-  width: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  @media (max-width: 576px) {
-    display: none;
-  }
-`;
 
 const Auth = () => {
-  return (
-    <Wrapper>
-      <AuthWrapper />
-      <SideImage />
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <AuthWrapper/>
+        </Wrapper>
+    );
 };
 
 export default Auth;
